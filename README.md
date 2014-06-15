@@ -1,4 +1,4 @@
-tic-tac-toe-web-app
+Tic-Tac-Toe as a web app
 ===================
 
-My Ruby Tic-Tac-Toe game as a web app
+I will be using Sinatra/Rails to host the Ruby Tic-Tac-Toe game I created.

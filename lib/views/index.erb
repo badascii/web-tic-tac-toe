@@ -1,11 +1,44 @@
 <html>
+<head>
+  <style>
+  #grid {
+    margin: 20px;
+  }
+  table td {
+    border: 1px solid;
+    width: 40px;
+  }
+  table tr {
+    border: 1px solid;
+  }
+  </style>
+</head>
 <body>
+
   <%= @message %>
   
   <% if @grid_location && !@grid_location.empty? %>
     <br />
     <%= "Your movement was: #{@grid_location}" %>
   <% end %>
+  
+  <table id="grid">
+    <tr>
+      <td> &nbsp; </td>
+      <td> &nbsp; </td>
+      <td> &nbsp; </td>
+    </tr>
+    <tr>
+      <td> &nbsp; </td>
+      <td> &nbsp; </td>
+      <td> &nbsp; </td>
+    </tr>
+    <tr>
+      <td> &nbsp; </td>
+      <td> &nbsp; </td>
+      <td> &nbsp; </td>
+    </tr>
+  </table>
   
   <form method="post" action="/">
     <label for="grid_location">Grid location</label>

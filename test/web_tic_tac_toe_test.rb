@@ -22,6 +22,7 @@ describe WebTicTacToe do
       click_button 'Move!'
       page.status_code.must_equal(200)
       page.has_content?('Movement accepted!').must_equal(true)
+      page.has_content?('Your movement was: 2c').must_equal(true)
     end
   end
   

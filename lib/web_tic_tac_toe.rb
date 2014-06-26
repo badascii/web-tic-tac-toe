@@ -6,6 +6,7 @@ class WebTicTacToe < Sinatra::Base
   end
   
   post '/' do
+    @grid_location = params[:grid_location]
     @message = "Movement accepted!"
     erb :index
   end

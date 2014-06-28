@@ -16,5 +16,9 @@ describe TicTacToe do
     it 'should send a successful response' do
       page.status_code.must_equal(200)
     end
+
+    it 'should display greeting text' do
+      page.has_content?('TIC-TAC-TOE').must_equal(true)
+    end
   end
 end

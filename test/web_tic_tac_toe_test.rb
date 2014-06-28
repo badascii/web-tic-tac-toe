@@ -7,16 +7,16 @@ Capybara.app = WebTicTacToe
 
 describe WebTicTacToe do
   include Capybara::DSL
-  
+
   describe 'landing page' do
     before do
       visit '/'
     end
-    
+
     it 'should successfully respond' do
       page.status_code.must_equal(200)
     end
-    
+
     it 'should allow user input for placement' do
       fill_in 'Grid location', with: '2c'
       click_button 'Move!'
@@ -25,5 +25,5 @@ describe WebTicTacToe do
       page.has_content?('Your movement was: 2c').must_equal(true)
     end
   end
-  
+
 end

@@ -1,4 +1,4 @@
-<html>
+ds<html>
 <head>
   <style>
   #grid {
@@ -17,12 +17,12 @@
 <body>
 
   <%= @message %>
-  
+
   <% if @grid_location && !@grid_location.empty? %>
     <br />
     <%= "Your movement was: #{@grid_location}" %>
   <% end %>
-  
+
   <table id="grid">
     <tr>
       <td> 1a </td>
@@ -40,7 +40,7 @@
       <td> 3c </td>
     </tr>
   </table>
-  
+
   <form method="post" action="/">
     <label for="grid_location">Grid location</label>
     <input type="text" name="grid_location" id="grid_location" />

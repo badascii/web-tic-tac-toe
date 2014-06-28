@@ -19,6 +19,7 @@ describe TicTacToe do
 
     it 'should display greeting text' do
       page.has_content?('TIC-TAC-TOE').must_equal(true)
+      page.has_button?('Submit').must_equal(true)
     end
   end
 end

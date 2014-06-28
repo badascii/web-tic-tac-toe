@@ -1,3 +1,3 @@
-require_relative './lib/web_tic_tac_toe'
+require_relative './lib/tic_tac_toe'
 
-run WebTicTacToe
+run TicTacToe

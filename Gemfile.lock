@@ -9,7 +9,7 @@ GEM
       xpath (~> 2.0)
     mime-types (2.3)
     mini_portile (0.6.0)
-    minitest (5.3.3)
+    minitest (5.3.5)
     nokogiri (1.6.2.1)
       mini_portile (= 0.6.0)
     puma (2.8.2)

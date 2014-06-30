@@ -25,5 +25,4 @@ describe WebTicTacToe do
       page.has_content?('Your movement was: 2c').must_equal(true)
     end
   end
-
 end

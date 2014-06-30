@@ -21,5 +21,11 @@ describe TicTacToe do
       page.has_content?('TIC-TAC-TOE').must_equal(true)
       page.has_button?('Submit').must_equal(true)
     end
+
+    it 'should accept player input' do
+      fill_in 'grid_location', with: '2c'
+      click_button 'Submit'
+      page.has_content?('Movement accepted').must_equal(true)
+    end
   end
 end

@@ -6,6 +6,25 @@
     <% if @grid_location && !@grid_location.empty? %>
       <%= "Your movement was #{@grid_location}" %>
     <% end %>
+
+    <table id="grid">
+      <tr>
+        <td> 1A </td>
+        <td> 1B </td>
+        <td> 1C </td>
+      </tr>
+      <tr>
+        <td> 2A </td>
+        <td> 2B </td>
+        <td> 2C </td>
+      </tr>
+      <tr>
+        <td> 3A </td>
+        <td> 3B </td>
+        <td> 3C </td>
+      </tr>
+    </table>
+
     <form method='post' action='/'>
       <label for='grid_location'>Grid Location</label>
       <input type='text' name='grid_location' id='grid_location' />

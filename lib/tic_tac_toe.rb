@@ -19,9 +19,11 @@ class TicTacToe < Sinatra::Base
   post '/' do
     @grid = session["grid"]
     @grid_location = params[:grid_location]
-    if @grid.has_key?(@grid_location)
+    if (@grid.has_key?(@grid_location)) && (@grid[@grid_location] == 0)
       @grid[@grid_location] = 'X'
-      @message = 'Movement accepted'
+      @message = 'Movement accepted.'
+    elsif (@grid.has_key?(@grid_location)) && (@grid[@grid_location] != 0)
+      @message = 'Invalid input. That position is taken.'
     else
       @message = 'Invalid input. Please try again.'
     end

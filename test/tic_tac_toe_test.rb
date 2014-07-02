@@ -10,6 +10,7 @@ describe TicTacToe do
 
   describe 'landing page' do
     before do
+      Capybara.reset_sessions!
       visit '/'
     end
 
@@ -23,7 +24,7 @@ describe TicTacToe do
     end
 
     it 'should accept player input' do
-      fill_in 'grid_location', with: '2c'
+      fill_in 'grid_location', with: 'c2'
       click_button 'Submit'
       page.has_content?('Movement accepted').must_equal(true)
     end
@@ -39,7 +40,8 @@ describe TicTacToe do
     it 'should not allow incorrect input' do
       fill_in 'grid_location', with: 'f5'
       click_button 'Submit'
-      page.has_content?('X').must_equal(false)
+      page.has_content?("X").must_equal(false)
+      page.has_content?("Invalid input. Please try again.").must_equal(true)
     end
   end
 end

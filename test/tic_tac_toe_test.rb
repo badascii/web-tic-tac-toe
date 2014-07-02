@@ -40,8 +40,15 @@ describe TicTacToe do
     it 'should not allow incorrect input' do
       fill_in 'grid_location', with: 'f5'
       click_button 'Submit'
-      page.has_content?("X").must_equal(false)
-      page.has_content?("Invalid input. Please try again.").must_equal(true)
+      page.has_content?('X').must_equal(false)
+      page.has_content?('Invalid input. Please try again.').must_equal(true)
+    end
+
+    it 'should only allow input for open spaces' do
+      fill_in 'grid_location', with: 'c2'
+      click_button 'Submit'
+      fill_in 'grid_location', with: 'c2'
+      page.has_content?('Invalid input. That position is taken.').must_equal(true)
     end
   end
 end

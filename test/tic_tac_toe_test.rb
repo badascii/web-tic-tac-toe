@@ -29,11 +29,17 @@ describe TicTacToe do
     end
 
     it 'should record player input on the grid' do
-      fill_in 'grid_location', with: '2c'
+      fill_in 'grid_location', with: 'c2'
       click_button 'Submit'
-      within('#grid') do
+      within('#c2') do
         page.has_content?('X').must_equal(true)
       end
+    end
+
+    it 'should not allow incorrect input' do
+      fill_in 'grid_location', with: 'f5'
+      click_button 'Submit'
+      page.has_content?('X').must_equal(false)
     end
   end
 end

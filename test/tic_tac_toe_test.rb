@@ -48,6 +48,7 @@ describe TicTacToe do
       fill_in 'grid_location', with: 'c2'
       click_button 'Submit'
       fill_in 'grid_location', with: 'c2'
+      click_button 'Submit'
       page.has_content?('Invalid input. That position is taken.').must_equal(true)
     end
   end

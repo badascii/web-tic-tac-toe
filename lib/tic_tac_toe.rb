@@ -19,6 +19,7 @@ class TicTacToe < Sinatra::Base
     @message = 'Movement accepted'
     @grid_location = params[:grid_location]
     @grid[@grid_location] = 'X'
+    session["grid"] = @grid
     erb :index
   end
 end

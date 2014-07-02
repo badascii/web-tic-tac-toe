@@ -28,7 +28,7 @@ describe TicTacToe do
       page.has_content?('Movement accepted').must_equal(true)
     end
 
-    it 'should track player input' do
+    it 'should record player input on the grid' do
       fill_in 'grid_location', with: '2c'
       click_button 'Submit'
       within('#grid') do

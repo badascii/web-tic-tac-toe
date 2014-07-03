@@ -7,7 +7,7 @@
       <%= "Your movement was #{@grid_location}." %>
     <% end %>
 
-    <table id="grid">
+    <table id='grid'>
       <tr>
         <td id='a1'> <%= @grid['a1'] %> </td>
         <td id='b1'> <%= @grid['b1'] %> </td>
@@ -28,7 +28,7 @@
     <form method='post' action='/'>
       <label for='grid_location'>Grid Location</label>
       <input type='text' name='grid_location' id='grid_location' />
-      <input type='submit' value="Submit" />
+      <input type='submit' value='Submit' />
     </form>
   </body>
 </html>

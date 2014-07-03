@@ -53,5 +53,27 @@ describe TicTacToe do
       click_button 'Submit'
       page.has_content?('Invalid input. That position is taken.').must_equal(true)
     end
+
+    it 'should end the game when the grid is full' do
+      fill_in 'grid_location', with: 'a1'
+      click_button 'Submit'
+      fill_in 'grid_location', with: 'b1'
+      click_button 'Submit'
+      fill_in 'grid_location', with: 'c1'
+      click_button 'Submit'
+      fill_in 'grid_location', with: 'a2'
+      click_button 'Submit'
+      fill_in 'grid_location', with: 'b2'
+      click_button 'Submit'
+      fill_in 'grid_location', with: 'c2'
+      click_button 'Submit'
+      fill_in 'grid_location', with: 'a3'
+      click_button 'Submit'
+      fill_in 'grid_location', with: 'b3'
+      click_button 'Submit'
+      fill_in 'grid_location', with: 'c3'
+      click_button 'Submit'
+      page.has_button?('Submit').must_equal(false)
+    end
   end
 end

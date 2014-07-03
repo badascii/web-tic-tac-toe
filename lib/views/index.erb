@@ -24,11 +24,12 @@
         <td id='c3'> <%= @grid['c3'] %> </td>
       </tr>
     </table>
-
-    <form method='post' action='/'>
-      <label for='grid_location'>Grid Location</label>
-      <input type='text' name='grid_location' id='grid_location' />
-      <input type='submit' value='Submit' />
-    </form>
+    <% if @grid.has_value?(0) %>
+      <form method='post' action='/'>
+        <label for='grid_location'>Grid Location</label>
+        <input type='text' name='grid_location' id='grid_location' />
+        <input type='submit' value='Submit' />
+      </form>
+    <% end %>
   </body>
 </html>

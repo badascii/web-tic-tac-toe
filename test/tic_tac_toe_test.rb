@@ -83,7 +83,7 @@ describe TicTacToe do
       click_button 'Submit'
       fill_in 'grid_location', with: 'c1'
       click_button 'Submit'
-      page.has_content?('You won!').must_equal(true)
+      page.has_content?('You win!').must_equal(true)
     end
   end
 end

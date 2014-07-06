@@ -19,16 +19,16 @@ class TicTacToe < Sinatra::Base
   ]
 
   before do
-    session["grid"] ||= GRID
+    session['grid'] ||= GRID
   end
 
   get '/' do
-    @grid = session["grid"]
+    @grid = session['grid']
     erb :index
   end
 
   post '/' do
-    @grid = session["grid"]
+    @grid = session['grid']
     @grid_location = params[:grid_location]
     if (@grid.has_key?(@grid_location)) && (@grid[@grid_location] == 0)
       @grid[@grid_location] = 'X'
@@ -38,7 +38,10 @@ class TicTacToe < Sinatra::Base
     else
       @message = 'Invalid input. Please try again.'
     end
-    session["grid"] = @grid
+    if horizontal_win?('X')
+      @message = 'Congratulations. You win!'
+    end
+    session['grid'] = @grid
     erb :index
   end
 

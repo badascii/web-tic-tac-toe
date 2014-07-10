@@ -76,12 +76,22 @@ describe TicTacToe do
       page.has_button?('Submit').must_equal(false)
     end
 
-    it 'should tell the player when they have won' do
+    it 'should tell the player when they have a horizontal win' do
       fill_in 'grid_location', with: 'a1'
       click_button 'Submit'
       fill_in 'grid_location', with: 'b1'
       click_button 'Submit'
       fill_in 'grid_location', with: 'c1'
+      click_button 'Submit'
+      page.has_content?('You win!').must_equal(true)
+    end
+
+    it 'should tell the player when they have a vertical win' do
+      fill_in 'grid_location', with: 'a1'
+      click_button 'Submit'
+      fill_in 'grid_location', with: 'a2'
+      click_button 'Submit'
+      fill_in 'grid_location', with: 'a3'
       click_button 'Submit'
       page.has_content?('You win!').must_equal(true)
     end

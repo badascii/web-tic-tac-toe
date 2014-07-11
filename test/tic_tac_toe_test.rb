@@ -105,6 +105,5 @@ describe TicTacToe do
       click_button 'Submit'
       page.has_content?('You win!').must_equal(true)
     end
-
   end
 end

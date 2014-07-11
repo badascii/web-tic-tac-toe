@@ -42,6 +42,8 @@ class TicTacToe < Sinatra::Base
       @message = 'Congratulations. You win!'
     elsif vertical_win?('X')
       @message = 'Congratulations. You win!'
+    elsif diagonal_win?('X')
+      @message = 'Congratulations. You win!'
     end
     session['grid'] = @grid
     erb :index
@@ -55,6 +57,10 @@ class TicTacToe < Sinatra::Base
 
   def vertical_win?(mark)
     three_in_a_row?(mark, WIN_CONDITIONS[0]) || three_in_a_row?(mark, WIN_CONDITIONS[1]) || three_in_a_row?(mark, WIN_CONDITIONS[2])
+  end
+
+  def diagonal_win?(mark)
+    three_in_a_row?(mark, WIN_CONDITIONS[6]) || three_in_a_row?(mark, WIN_CONDITIONS[7])
   end
 
   def three_in_a_row?(mark, win_condition)

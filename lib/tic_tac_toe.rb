@@ -18,6 +18,9 @@ class TicTacToe < Sinatra::Base
   ["a3", "b2", "c1"]  #   diagonal win 7
   ]
 
+  POSITION_REGEX         = /[abc][1-3]/
+  POSITION_REGEX_REVERSE = /[1-3][abc]/
+
   before do
     session['grid'] ||= GRID
   end
@@ -29,11 +32,11 @@ class TicTacToe < Sinatra::Base
 
   post '/' do
     @grid = session['grid']
-    @grid_location = params[:grid_location]
-    if (@grid.has_key?(@grid_location)) && (@grid[@grid_location] == 0)
-      @grid[@grid_location] = 'X'
+    @player_move = params[:grid_location]
+    if valid_position_format?(@player_move) && @grid[@player_move] == 0
+      @grid[@player_move] = 'X'
       @message = 'Movement accepted.'
-    elsif (@grid.has_key?(@grid_location)) && (@grid[@grid_location] != 0)
+    elsif valid_position_format?(@player_move)
       @message = 'Invalid input. That position is taken.'
     else
       @message = 'Invalid input. Please try again.'
@@ -50,6 +53,10 @@ class TicTacToe < Sinatra::Base
   end
 
   private
+
+  def valid_position_format?(position)
+    (position =~ POSITION_REGEX) || (position =~ POSITION_REGEX_REVERSE)
+  end
 
   def horizontal_win?(mark)
     three_in_a_row?(mark, WIN_CONDITIONS[3]) || three_in_a_row?(mark, WIN_CONDITIONS[4]) || three_in_a_row?(mark, WIN_CONDITIONS[5])

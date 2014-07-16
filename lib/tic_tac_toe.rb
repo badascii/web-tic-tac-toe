@@ -73,5 +73,4 @@ class TicTacToe < Sinatra::Base
   def three_in_a_row?(mark, win_condition)
     (@grid[win_condition[0]] == mark) && (@grid[win_condition[1]] == mark) && (@grid[win_condition[2]] == mark)
   end
-
 end

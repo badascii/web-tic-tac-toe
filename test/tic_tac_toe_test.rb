@@ -105,5 +105,13 @@ describe TicTacToe do
       click_button 'Submit'
       page.has_content?('You win!').must_equal(true)
     end
+
+    it 'should place the initial CPU move in B2 if open' do
+      fill_in 'grid_location', with: 'a1'
+      click_button 'Submit'
+      within('#grid') do
+        page.has_content?('O').must_equal(true)
+      end
+    end
   end
 end

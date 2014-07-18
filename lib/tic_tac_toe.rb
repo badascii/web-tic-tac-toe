@@ -36,6 +36,7 @@ class TicTacToe < Sinatra::Base
     if valid_position_format?(@player_move) && @grid[@player_move] == 0
       @grid[@player_move] = 'X'
       @message = 'Movement accepted.'
+      opening_move
     elsif valid_position_format?(@player_move)
       @message = 'Invalid input. That position is taken.'
     else
@@ -72,5 +73,17 @@ class TicTacToe < Sinatra::Base
 
   def three_in_a_row?(mark, win_condition)
     (@grid[win_condition[0]] == mark) && (@grid[win_condition[1]] == mark) && (@grid[win_condition[2]] == mark)
+  end
+
+  def opening_move
+    if position_empty?('b2')
+      @grid['b2'] = 'O'
+    else
+      @grid['a1'] = 'O'
+    end
+  end
+
+  def position_empty?(position)
+    @grid[position] == 0
   end
 end

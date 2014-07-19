@@ -113,5 +113,15 @@ describe TicTacToe do
         page.has_content?('O').must_equal(true)
       end
     end
+
+    it 'should place the second CPU move' do
+      fill_in 'grid_location', with: 'a1'
+      click_button 'Submit'
+      fill_in 'grid_location', with: 'a2'
+      click_button 'Submit'
+      within('#b1') do
+        page.has_content?('O').must_equal(true)
+      end
+    end
   end
 end

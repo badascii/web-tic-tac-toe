@@ -87,11 +87,11 @@ describe TicTacToe do
     end
 
     it 'should tell the player when they have a vertical win' do
-      fill_in 'grid_location', with: 'a1'
+      fill_in 'grid_location', with: 'c1'
       click_button 'Submit'
-      fill_in 'grid_location', with: 'a2'
+      fill_in 'grid_location', with: 'c2'
       click_button 'Submit'
-      fill_in 'grid_location', with: 'a3'
+      fill_in 'grid_location', with: 'c3'
       click_button 'Submit'
       page.has_content?('You win!').must_equal(true)
     end

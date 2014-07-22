@@ -38,8 +38,10 @@ class TicTacToe < Sinatra::Base
       @message = 'Movement accepted.'
       if @grid.values.uniq.length == 2
         opening_move
-      else
+      elsif @grid['b1'] == 0
         @grid['b1'] = 'O'
+      else
+        @grid['b3'] = 'O'
       end
     elsif valid_position_format?(@player_move)
       @message = 'Invalid input. That position is taken.'

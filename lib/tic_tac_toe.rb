@@ -45,8 +45,11 @@ class TicTacToe < Sinatra::Base
     if win?('X')
       @message = 'Congratulations. You win!'
     elsif win?('O')
+<<<<<<< HEAD
       @message = 'Congratulations. You win!'
     elsif diagonal_win?('X')
+=======
+>>>>>>> 7f5a17768ef275be7c993fc4c5767dff8258fd5c
       @message = 'Congratulations. You win!'
     end
     session['grid'] = @grid
@@ -94,8 +97,12 @@ class TicTacToe < Sinatra::Base
   end
 
   def opening_move
+    win = cpu_check_for_win('O')
+
     if position_empty?('b2')
       @grid['b2'] = 'O'
+    elsif win
+      @grid[win]  = 'O'
     else
       @grid['b1'] = 'O'
     end

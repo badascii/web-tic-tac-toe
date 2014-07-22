@@ -42,9 +42,9 @@ class TicTacToe < Sinatra::Base
     else
       @message = 'Invalid input. Please try again.'
     end
-    if horizontal_win?('X')
+    if win?('X')
       @message = 'Congratulations. You win!'
-    elsif vertical_win?('X')
+    elsif win?('O')
       @message = 'Congratulations. You win!'
     elsif diagonal_win?('X')
       @message = 'Congratulations. You win!'
@@ -57,6 +57,10 @@ class TicTacToe < Sinatra::Base
 
   def valid_position_format?(position)
     (position =~ POSITION_REGEX) || (position =~ POSITION_REGEX_REVERSE)
+  end
+
+  def win?(mark)
+    vertical_win?(mark) || horizontal_win?(mark) || diagonal_win?(mark)
   end
 
   def horizontal_win?(mark)
@@ -76,9 +80,13 @@ class TicTacToe < Sinatra::Base
   end
 
   def cpu_turn
+    win = cpu_check_for_win('O')
+
     if @grid.values.uniq.length == 2
       opening_move
-    elsif @grid['b1'] == 0
+    elsif win
+      @grid[win]  = 'O'
+    elsif
       @grid['b1'] = 'O'
     else
       @grid['b3'] = 'O'
@@ -89,11 +97,28 @@ class TicTacToe < Sinatra::Base
     if position_empty?('b2')
       @grid['b2'] = 'O'
     else
-      @grid['a1'] = 'O'
+      @grid['b1'] = 'O'
     end
   end
 
   def position_empty?(position)
     @grid[position] == 0
+  end
+
+  def cpu_check_for_win(mark)
+    move = nil
+    WIN_CONDITIONS.each do |condition|
+      occupied_spaces = []
+      open_space = false
+      condition.each do |position|
+        open_space = true if position_empty?(position)
+        occupied_spaces << position if @grid[position] == mark
+      end
+      if occupied_spaces.length == 2 && open_space == true
+        move = condition - occupied_spaces
+        return move.first
+      end
+    end
+      return move
   end
 end

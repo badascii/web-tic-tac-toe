@@ -31,10 +31,10 @@ class TicTacToe < Sinatra::Base
   end
 
   post '/' do
-    @grid        = session['grid']
     @player_mark = 'X'
     @cpu_mark    = 'O'
     @player_move = params[:grid_location]
+    @grid        = session['grid']
 
     if valid_position_format?(@player_move) && @grid[@player_move] == 0
       @grid[@player_move] = @player_mark
@@ -87,20 +87,14 @@ class TicTacToe < Sinatra::Base
       opening_move
     elsif win
       @grid[win]  = @cpu_mark
-    elsif
-      @grid['b1'] = @cpu_mark
     else
       @grid['b3'] = @cpu_mark
     end
   end
 
   def opening_move
-    win = cpu_check_for_win(@cpu_mark)
-
     if position_empty?('b2')
       @grid['b2'] = @cpu_mark
-    elsif win
-      @grid[win]  = @cpu_mark
     else
       @grid['b1'] = @cpu_mark
     end

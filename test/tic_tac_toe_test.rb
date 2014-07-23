@@ -79,7 +79,7 @@ describe TicTacToe do
     it 'should place the initial CPU move in B2 if open' do
       fill_in 'grid_location', with: 'a1'
       click_button 'Submit'
-      within('#grid') do
+      within('#b2') do
         page.has_content?('O').must_equal(true)
       end
     end

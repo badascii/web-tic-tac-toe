@@ -31,16 +31,16 @@ class TicTacToe < Sinatra::Base
   end
 
   post '/' do
-    @player_mark = 'X'
-    @cpu_mark    = 'O'
-    @player_move = params[:grid_location]
-    @grid        = session['grid']
+    @player_mark  = 'X'
+    @cpu_mark     = 'O'
+    @player_input = params[:grid_location]
+    @grid         = session['grid']
 
-    if valid_position_format?(@player_move) && @grid[@player_move] == 0
-      @grid[@player_move] = @player_mark
+    if valid_position_format?(@player_input) && @grid[@player_input] == 0
+      @grid[@player_input] = @player_mark
       @message = 'Movement accepted.'
       cpu_turn
-    elsif valid_position_format?(@player_move)
+    elsif valid_position_format?(@player_input)
       @message = 'Invalid input. That position is taken.'
     else
       @message = 'Invalid input. Please try again.'
@@ -81,12 +81,15 @@ class TicTacToe < Sinatra::Base
   end
 
   def cpu_turn
-    win = cpu_check_for_win(@cpu_mark)
+    win  = cpu_check_for_win(@cpu_mark)
+    loss = cpu_check_for_win(@player_mark)
 
     if @grid.values.uniq.length == 2
       opening_move
     elsif win
       @grid[win]  = @cpu_mark
+    elsif loss
+      @grid[loss] = @cpu_mark
     else
       @grid['b3'] = @cpu_mark
     end

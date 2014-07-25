@@ -92,6 +92,8 @@ class TicTacToe < Sinatra::Base
       @grid[loss] = @cpu_mark
     elsif corner_defense?
       place_corner_defense
+    elsif side_defense?
+      place_side_defense
     elsif opposite_corners?
       @grid['a2'] = @cpu_mark
     else

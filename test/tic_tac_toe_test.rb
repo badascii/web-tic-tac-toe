@@ -84,16 +84,6 @@ describe TicTacToe do
       end
     end
 
-    it 'should place the second CPU move' do
-      fill_in 'grid_location', with: 'a1'
-      click_button 'Submit'
-      fill_in 'grid_location', with: 'c2'
-      click_button 'Submit'
-      within('#c3') do
-        page.has_content?('O').must_equal(true)
-      end
-    end
-
     it 'should place the third CPU move' do
       fill_in 'grid_location', with: 'a1'
       click_button 'Submit'
@@ -119,8 +109,8 @@ describe TicTacToe do
     it 'should place loss-preventing CPU moves' do
       fill_in 'grid_location', with: 'b2'
       click_button 'Submit'
-      fill_in 'grid_location', with: 'a1'
-      within('#c3') do
+      fill_in 'grid_location', with: 'a2'
+      within('#c2') do
         page.has_content?('O').must_equal(true)
       end
     end
@@ -133,6 +123,16 @@ describe TicTacToe do
       fill_in 'grid_location', with: 'a2'
       click_button 'Submit'
       within('#a1') do
+        page.has_content?('O').must_equal(true)
+      end
+    end
+
+    it 'should place strategic CPU moves in the absense of other conditions' do
+      fill_in 'grid_location', with: 'c3'
+      click_button 'Submit'
+      fill_in 'grid_location', with: 'a2'
+      click_button 'Submit'
+      within('#b1') do
         page.has_content?('O').must_equal(true)
       end
     end

@@ -136,5 +136,15 @@ describe TicTacToe do
         page.has_content?('O').must_equal(true)
       end
     end
+
+    it 'should have the CPU defend against opposite corner opening moves' do
+      fill_in 'grid_location', with: 'a1'
+      click_button 'Submit'
+      fill_in 'grid_location', with: 'c3'
+      click_button 'Submit'
+      within('#a2') do
+        page.has_content?('O').must_equal(true)
+      end
+    end
   end
 end

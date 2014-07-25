@@ -93,20 +93,8 @@ class TicTacToe < Sinatra::Base
     elsif corner_defense?
       place_corner_defense
     else
-      @grid['c3'] = @cpu_mark
+      optimal_move
     end
-  end
-
-  def opening_move
-    if position_empty?('b2')
-      @grid['b2'] = @cpu_mark
-    else
-      @grid['b1'] = @cpu_mark
-    end
-  end
-
-  def position_empty?(position)
-    @grid[position] == 0
   end
 
   def cpu_check_for_win(mark)
@@ -123,7 +111,34 @@ class TicTacToe < Sinatra::Base
         return move.first
       end
     end
-      return move
+    return move
+  end
+
+  def opening_move
+    if position_empty?('b2')
+      @grid['b2'] = @cpu_mark
+    else
+      @grid['a1'] = @cpu_mark
+    end
+  end
+
+  def optimal_move
+    if position_empty?("b1") && position_empty?("b3")
+      @grid["b1"] = @cpu_mark
+    elsif position_empty?("a2") && position_empty?("c2")
+      @grid["c2"] = @cpu_mark
+    else
+      @grid.each do |key, value|
+        if value == 0
+          @grid[key] = @cpu_mark
+          break
+        end
+      end
+    end
+  end
+
+  def position_empty?(position)
+    @grid[position] == 0
   end
 
   def corner_defense?

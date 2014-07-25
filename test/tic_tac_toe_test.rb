@@ -105,6 +105,16 @@ describe TicTacToe do
       end
     end
 
+    it 'should place strategic CPU moves in the absense of other conditions' do
+      fill_in 'grid_location', with: 'c3'
+      click_button 'Submit'
+      fill_in 'grid_location', with: 'a2'
+      click_button 'Submit'
+      within('#b1') do
+        page.has_content?('O').must_equal(true)
+      end
+    end
+
     it 'should place CPU corner moves in specific game states' do
       fill_in 'grid_location', with: 'c3'
       click_button 'Submit'
@@ -117,12 +127,12 @@ describe TicTacToe do
       end
     end
 
-    it 'should place strategic CPU moves in the absense of other conditions' do
+    it 'should place CPU side moves in specific game states' do
       fill_in 'grid_location', with: 'c3'
       click_button 'Submit'
-      fill_in 'grid_location', with: 'a2'
+      fill_in 'grid_location', with: 'b1'
       click_button 'Submit'
-      within('#b1') do
+      within('#c2') do
         page.has_content?('O').must_equal(true)
       end
     end

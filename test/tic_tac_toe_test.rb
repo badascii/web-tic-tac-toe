@@ -89,7 +89,7 @@ describe TicTacToe do
       click_button 'Submit'
       fill_in 'grid_location', with: 'c2'
       click_button 'Submit'
-      within('#b3') do
+      within('#c3') do
         page.has_content?('O').must_equal(true)
       end
     end
@@ -106,7 +106,7 @@ describe TicTacToe do
       end
     end
 
-    it 'should have the CPU take winning moves' do
+    it 'should place winning CPU moves' do
       fill_in 'grid_location', with: 'a1'
       click_button 'Submit'
       fill_in 'grid_location', with: 'a2'
@@ -116,11 +116,23 @@ describe TicTacToe do
       page.has_content?('You lose. Really?').must_equal(true)
     end
 
-    it 'should have the CPU block losing moves' do
+    it 'should place loss-preventing CPU moves' do
+      fill_in 'grid_location', with: 'b2'
+      click_button 'Submit'
       fill_in 'grid_location', with: 'a1'
+      within('#c3') do
+        page.has_content?('O').must_equal(true)
+      end
+    end
+
+    it 'should place CPU corner moves in specific game states' do
+      fill_in 'grid_location', with: 'c3'
+      click_button 'Submit'
+      fill_in 'grid_location', with: 'b1'
       click_button 'Submit'
       fill_in 'grid_location', with: 'a2'
-      within('#a3') do
+      click_button 'Submit'
+      within('#a1') do
         page.has_content?('O').must_equal(true)
       end
     end

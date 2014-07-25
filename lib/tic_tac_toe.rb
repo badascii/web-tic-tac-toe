@@ -177,4 +177,8 @@ class TicTacToe < Sinatra::Base
       @grid['c2'] = @cpu_mark
     end
   end
+
+  def opposite_corners?
+    (@grid['a1'] == @player_mark && @grid['c3'] == @player_mark) || (@grid['a3'] == @player_mark && @grid['c1'] == @player_mark)
+  end
 end

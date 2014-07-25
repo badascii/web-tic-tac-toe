@@ -54,7 +54,7 @@ describe TicTacToe do
       page.has_content?('Invalid input. That position is taken.').must_equal(true)
     end
 
-    # TODO: Reimplement this test separately for both AI and human opponent
+    # TODO: Re-implement this test separately for both AI and human opponent
     # it 'should end the game when the grid is full' do
     #   fill_in 'grid_location', with: 'a1'
     #   click_button 'Submit'

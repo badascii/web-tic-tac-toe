@@ -26,11 +26,15 @@ class TicTacToe < Sinatra::Base
   end
 
   get '/' do
-    @grid = session['grid']
     erb :index
   end
 
-  post '/' do
+  get '/game' do
+    @grid = session['grid']
+    erb :game
+  end
+
+  post '/game' do
     @player_mark  = 'X'
     @cpu_mark     = 'O'
     @player_input = params[:grid_location]
@@ -51,7 +55,7 @@ class TicTacToe < Sinatra::Base
       @message = 'You lose. Really?'
     end
     session['grid'] = @grid
-    erb :index
+    erb :game
   end
 
   private

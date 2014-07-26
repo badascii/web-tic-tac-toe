@@ -18,6 +18,17 @@ describe TicTacToe do
       page.status_code.must_equal(200)
     end
 
+    it 'should have a Start Game button' do
+      page.has_button?('Start').must_equal(true)
+    end
+  end
+
+  describe 'game' do
+    before do
+      Capybara.reset_sessions!
+      visit '/game'
+    end
+
     it 'should display greeting text' do
       page.has_content?('TIC-TAC-TOE').must_equal(true)
       page.has_button?('Submit').must_equal(true)
@@ -145,11 +156,6 @@ describe TicTacToe do
       within('#a2') do
         page.has_content?('O').must_equal(true)
       end
-    end
-
-    it 'should prompt for either 1 or 2 players' do
-      page.has_button?('CPU').must_equal(true)
-      page.has_button?('Human').must_equal(true)
     end
   end
 end

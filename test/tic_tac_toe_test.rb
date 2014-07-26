@@ -146,5 +146,10 @@ describe TicTacToe do
         page.has_content?('O').must_equal(true)
       end
     end
+
+    it 'should prompt for either 1 or 2 players' do
+      page.has_button?('CPU').must_equal(true)
+      page.has_button?('Human').must_equal(true)
+    end
   end
 end

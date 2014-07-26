@@ -3,9 +3,9 @@
     <h1>TIC-TAC-TOE</h1>
     <h3>Please select a game format:</h3>
     <form method='post' action='/game'>
-      <label for='grid_location'>Grid Location</label>
-      <input type='text' name='game_mode' id='grid_location' />
-      <input type='radio' value='vs. human' />
+      <label for='game_mode'>Game Mode:</label>
+      <input type='radio' value='Human' name='human' />
+      <input type='radio' value='CPU' name='CPU' />
       <input type='submit' value='Start' />
     </form>
   </body>

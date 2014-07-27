@@ -21,6 +21,12 @@ describe TicTacToe do
     it 'should have a Start Game button' do
       page.has_button?('Start').must_equal(true)
     end
+
+    it 'should allow the user to choose their opponent' do
+      choose('human')
+      click_button 'Start'
+      page.has_content?('Human vs. Human').must_equal(true)
+    end
   end
 
   describe 'game' do

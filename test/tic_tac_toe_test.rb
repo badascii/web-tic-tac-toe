@@ -36,7 +36,7 @@ describe TicTacToe do
     end
 
     it 'should display greeting text' do
-      page.has_content?('TIC-TAC-TOE').must_equal(true)
+      page.has_content?('Welcome').must_equal(true)
       page.has_button?('Submit').must_equal(true)
     end
 
@@ -97,6 +97,7 @@ describe TicTacToe do
     it 'should place the initial CPU move in B2 if open' do
       fill_in 'grid_location', with: 'a1'
       click_button 'Submit'
+      save_and_open_page
       within('#b2') do
         page.has_content?('O').must_equal(true)
       end

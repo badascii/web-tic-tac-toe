@@ -31,6 +31,7 @@ class TicTacToe < Sinatra::Base
 
   get '/game' do
     @grid = session['grid']
+    @message = 'Welcome to the Fields of Strife'
     erb :game
   end
 

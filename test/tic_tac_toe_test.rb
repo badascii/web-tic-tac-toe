@@ -27,6 +27,12 @@ describe TicTacToe do
       click_button 'Start'
       page.has_content?('Human vs. Human').must_equal(true)
     end
+
+    it 'should allow the user to play vs. the CPU' do
+      choose('cpu')
+      click_button 'Start'
+      page.has_content?('Player vs. CPU').must_equal(true)
+    end
   end
 
   describe 'game' do
@@ -97,7 +103,6 @@ describe TicTacToe do
     it 'should place the initial CPU move in B2 if open' do
       fill_in 'grid_location', with: 'a1'
       click_button 'Submit'
-      save_and_open_page
       within('#b2') do
         page.has_content?('O').must_equal(true)
       end

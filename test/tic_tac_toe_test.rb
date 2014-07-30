@@ -27,15 +27,9 @@ describe TicTacToe do
       click_button 'Start'
       page.has_content?('Player vs Player').must_equal(true)
     end
-
-    it 'should allow the user to play versus the CPU' do
-      choose('cpu')
-      click_button 'Start'
-      page.has_content?('Player vs CPU').must_equal(true)
-    end
   end
 
-  describe 'game' do
+  describe 'input' do
     before do
       Capybara.reset_sessions!
       visit '/'
@@ -77,29 +71,19 @@ describe TicTacToe do
       click_button 'Submit'
       page.has_content?('Invalid input. That position is taken.').must_equal(true)
     end
+  end
 
-    # TODO: Re-implement this test separately for both AI and human opponent
-    # it 'should end the game when the grid is full' do
-    #   fill_in 'grid_location', with: 'a1'
-    #   click_button 'Submit'
-    #   fill_in 'grid_location', with: 'b1'
-    #   click_button 'Submit'
-    #   fill_in 'grid_location', with: 'c1'
-    #   click_button 'Submit'
-    #   fill_in 'grid_location', with: 'a2'
-    #   click_button 'Submit'
-    #   fill_in 'grid_location', with: 'b2'
-    #   click_button 'Submit'
-    #   fill_in 'grid_location', with: 'c2'
-    #   click_button 'Submit'
-    #   fill_in 'grid_location', with: 'a3'
-    #   click_button 'Submit'
-    #   fill_in 'grid_location', with: 'b3'
-    #   click_button 'Submit'
-    #   fill_in 'grid_location', with: 'c3'
-    #   click_button 'Submit'
-    #   page.has_button?('Submit').must_equal(false)
-    # end
+  describe 'cpu match' do
+    before do
+      Capybara.reset_sessions!
+      visit '/'
+      choose('cpu')
+      click_button 'Start'
+    end
+
+    it 'should notify the player that it is a CPU match' do
+      page.has_content?('Player vs CPU').must_equal(true)
+    end
 
     it 'should place the initial CPU move in B2 if open' do
       fill_in 'grid_location', with: 'a1'
@@ -169,6 +153,19 @@ describe TicTacToe do
       within('#a2') do
         page.has_content?('O').must_equal(true)
       end
+    end
+  end
+
+  describe 'human match' do
+    before do
+      Capybara.reset_sessions!
+      visit '/'
+      choose('human')
+      click_button 'Start'
+    end
+
+    it 'should notify the player that it is a human match' do
+      page.has_content?('Player vs Player').must_equal(true)
     end
   end
 end

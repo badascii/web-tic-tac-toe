@@ -1,7 +1,11 @@
 <html>
   <body>
-    <h1>TIC-TAC-TOE</h1>
-    <%= @message %>
+    <h1>Tic-Tac-Toe</h1>
+    <% if @mode == 'human' %>
+      <%= '<h2>Player vs Player. Fight!</h2>' %>
+    <% else %>
+      <%= '<h2>Player vs CPU. Good luck!</h2>' %>
+    <% end %>
 
     <% if @grid_location && !@grid_location.empty? %>
       <%= "Your movement was #{@grid_location}." %>

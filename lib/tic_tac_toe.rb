@@ -31,18 +31,21 @@ class TicTacToe < Sinatra::Base
 
   get '/game' do
     @grid = session['grid']
+    @mode = params[:mode]
     @message = 'Welcome to the Fields of Strife'
     erb :game
   end
 
   post '/game' do
-    @player_mark  = 'X'
+    @player_1     = 'X'
+    @player_2     = 'O'
     @cpu_mark     = 'O'
     @player_input = params[:grid_location]
+    @mode         = params[:mode]
     @grid         = session['grid']
 
     if valid_position_format?(@player_input) && @grid[@player_input] == 0
-      @grid[@player_input] = @player_mark
+      @grid[@player_input] = @player_1
       @message = 'Movement accepted.'
       cpu_turn
     elsif valid_position_format?(@player_input)
@@ -50,7 +53,7 @@ class TicTacToe < Sinatra::Base
     else
       @message = 'Invalid input. Please try again.'
     end
-    if win?(@player_mark)
+    if win?(@player_1)
       @message = 'Congratulations. You win!'
     elsif win?(@cpu_mark)
       @message = 'You lose. Really?'
@@ -87,7 +90,7 @@ class TicTacToe < Sinatra::Base
 
   def cpu_turn
     win  = cpu_check_for_win(@cpu_mark)
-    loss = cpu_check_for_win(@player_mark)
+    loss = cpu_check_for_win(@player_1)
 
     if @grid.values.uniq.length == 2
       opening_move
@@ -186,6 +189,6 @@ class TicTacToe < Sinatra::Base
   end
 
   def opposite_corners?
-    (@grid['a1'] == @player_mark && @grid['c3'] == @player_mark) || (@grid['a3'] == @player_mark && @grid['c1'] == @player_mark)
+    (@grid['a1'] == @player_1 && @grid['c3'] == @player_1) || (@grid['a3'] == @player_1 && @grid['c1'] == @player_1)
   end
 end

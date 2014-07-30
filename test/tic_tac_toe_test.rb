@@ -25,13 +25,13 @@ describe TicTacToe do
     it 'should allow the user to choose their opponent' do
       choose('human')
       click_button 'Start'
-      page.has_content?('Human vs. Human').must_equal(true)
+      page.has_content?('Player vs Player').must_equal(true)
     end
 
-    it 'should allow the user to play vs. the CPU' do
+    it 'should allow the user to play versus the CPU' do
       choose('cpu')
       click_button 'Start'
-      page.has_content?('Player vs. CPU').must_equal(true)
+      page.has_content?('Player vs CPU').must_equal(true)
     end
   end
 

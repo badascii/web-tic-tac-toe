@@ -58,6 +58,7 @@ describe TicTacToe do
       click_button 'Submit'
       within('#c2') do
         page.has_content?('X').must_equal(true)
+        page.has_content?('Movement accepted').must_equal(true)
       end
     end
 

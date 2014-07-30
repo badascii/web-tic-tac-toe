@@ -38,7 +38,9 @@ describe TicTacToe do
   describe 'game' do
     before do
       Capybara.reset_sessions!
-      visit '/game'
+      visit '/'
+      choose('cpu')
+      click_button 'Start'
     end
 
     it 'should display greeting text' do

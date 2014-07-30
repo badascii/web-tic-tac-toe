@@ -30,19 +30,19 @@ class TicTacToe < Sinatra::Base
   end
 
   get '/game' do
-    @grid = session['grid']
-    @mode = params[:mode]
+    @grid    = session['grid']
+    @mode    = params[:mode]
     @message = 'Welcome to the Fields of Strife'
     erb :game
   end
 
   post '/game' do
-    @player_1     = 'X'
-    @player_2     = 'O'
-    @cpu_mark     = 'O'
-    @player_input = params[:grid_location]
-    @mode         = params[:mode]
-    @grid         = session['grid']
+    @player_1       = 'X'
+    @player_2       = 'O'
+    @cpu_mark       = 'O'
+    @player_input ||= params[:grid_location]
+    @mode         ||= params[:mode]
+    @grid         ||= session['grid']
 
     if valid_position_format?(@player_input) && @grid[@player_input] == 0
       @grid[@player_input] = @player_1

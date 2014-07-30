@@ -43,8 +43,7 @@ describe TicTacToe do
       click_button 'Start'
     end
 
-    it 'should display greeting text' do
-      page.has_content?('Welcome').must_equal(true)
+    it 'should have a Submit button' do
       page.has_button?('Submit').must_equal(true)
     end
 

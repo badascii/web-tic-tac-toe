@@ -30,35 +30,61 @@ class TicTacToe < Sinatra::Base
   end
 
   get '/game' do
-    @grid    = session['grid']
-    @mode    = params[:mode]
-    @message = 'Welcome to the Fields of Strife'
+    @grid    ||= session['grid']
+    @mode    ||= params[:mode]
+    @message   = 'Welcome to the Fields of Strife'
     erb :game
   end
 
+  # fresh game
   post '/game' do
+
     @player_1       = 'X'
     @player_2       = 'O'
-    @cpu_mark       = 'O'
+    @cpu            = 'O'
+    @player_turn    = @player_1
     @player_input ||= params[:grid_location]
-    @mode         ||= params[:mode]
+    @mode           = session['mode'] || params[:mode]
     @grid         ||= session['grid']
 
-    if valid_position_format?(@player_input) && @grid[@player_input] == 0
-      @grid[@player_input] = @player_1
-      @message = 'Movement accepted.'
-      cpu_turn
-    elsif valid_position_format?(@player_input)
-      @message = 'Invalid input. That position is taken.'
-    else
-      @message = 'Invalid input. Please try again.'
+    if @mode == 'cpu'
+      if valid_position_format?(@player_input) && @grid[@player_input] == 0
+        @grid[@player_input] = @player_1
+        @message = 'Movement accepted.'
+      elsif valid_position_format?(@player_input)
+        @message = 'Invalid input. That position is taken.'
+      else
+        @message = 'Invalid input. Please try again.'
+      end
+      if win?(@player_1)
+        @message = 'Congratulations. You win!'
+      elsif win?(@cpu)
+        @message = 'You lose. Really?'
+      end
+    elsif @mode == 'human'
+      if valid_position_format?(@player_input) && @grid[@player_input] == 0
+        if @player_turn == @player_1
+          @grid[@player_input] = @player_1
+          @message = 'Movement accepted.'
+        elsif @player_turn == @player_2
+          @grid[@player_input] = @player_2
+          @message = 'Movement accepted.'
+        end
+      elsif valid_position_format?(@player_input)
+        @message = 'Invalid input. That position is taken.'
+      else
+        @message = 'Invalid input. Please try again.'
+      end
     end
+
     if win?(@player_1)
       @message = 'Congratulations. You win!'
-    elsif win?(@cpu_mark)
+    elsif win?(@cpu)
       @message = 'You lose. Really?'
     end
+
     session['grid'] = @grid
+    session['mode'] = @mode
     erb :game
   end
 
@@ -89,21 +115,21 @@ class TicTacToe < Sinatra::Base
   end
 
   def cpu_turn
-    win  = cpu_check_for_win(@cpu_mark)
+    win  = cpu_check_for_win(@cpu)
     loss = cpu_check_for_win(@player_1)
 
     if @grid.values.uniq.length == 2
       opening_move
     elsif win
-      @grid[win]  = @cpu_mark
+      @grid[win]  = @cpu
     elsif loss
-      @grid[loss] = @cpu_mark
+      @grid[loss] = @cpu
     elsif corner_defense?
       place_corner_defense
     elsif side_defense?
       place_side_defense
     elsif opposite_corners?
-      @grid['a2'] = @cpu_mark
+      @grid['a2'] = @cpu
     else
       optimal_move
     end
@@ -128,21 +154,21 @@ class TicTacToe < Sinatra::Base
 
   def opening_move
     if position_empty?('b2')
-      @grid['b2'] = @cpu_mark
+      @grid['b2'] = @cpu
     else
-      @grid['a1'] = @cpu_mark
+      @grid['a1'] = @cpu
     end
   end
 
   def optimal_move
     if position_empty?('b1') && position_empty?('b3')
-      @grid['b1'] = @cpu_mark
+      @grid['b1'] = @cpu
     elsif position_empty?('a2') && position_empty?('c2')
-      @grid['c2'] = @cpu_mark
+      @grid['c2'] = @cpu
     else
       @grid.each do |key, value|
         if value == 0
-          @grid[key] = @cpu_mark
+          @grid[key] = @cpu
           break
         end
       end
@@ -160,31 +186,31 @@ class TicTacToe < Sinatra::Base
 
   def place_corner_defense
     if @grid['a1'] == 0
-      @grid['a1'] = @cpu_mark
+      @grid['a1'] = @cpu
     elsif @grid['c1'] == 0
-      @grid['c1'] = @cpu_mark
+      @grid['c1'] = @cpu
     elsif @grid['a3'] == 0
-     @grid['a3'] = @cpu_mark
+     @grid['a3'] = @cpu
     elsif @grid['c3'] == 0
-      @grid['c3'] = @cpu_mark
+      @grid['c3'] = @cpu
     end
   end
 
   def side_defense?
     corner_positions = [@grid['a1'], @grid['a3'], @grid['c1'], @grid['c3']]
     side_positions   = [@grid['a2'], @grid['b1'], @grid['b3'], @grid['c2']]
-    (@grid['b2'] == @cpu_mark) && (corner_positions.uniq.count == 2) && (side_positions.uniq.count == 3)
+    (@grid['b2'] == @cpu) && (corner_positions.uniq.count == 2) && (side_positions.uniq.count == 3)
   end
 
   def place_side_defense
     if @grid['a2'] == 0
-      @grid['a2'] = @cpu_mark
+      @grid['a2'] = @cpu
     elsif @grid['b1'] == 0
-      @grid['b1'] = @cpu_mark
+      @grid['b1'] = @cpu
     elsif @grid['b3'] == 0
-      @grid['b3'] = @cpu_mark
+      @grid['b3'] = @cpu
     elsif @grid['c2'] == 0
-      @grid['c2'] = @cpu_mark
+      @grid['c2'] = @cpu
     end
   end
 

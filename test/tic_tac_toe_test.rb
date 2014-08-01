@@ -169,10 +169,10 @@ describe TicTacToe do
     end
 
     it 'should display whose turn it is' do
-      page.has_content?("Player 1 Turn").must_equal(true)
+      page.has_content?('Player 1 Turn').must_equal(true)
       fill_in 'grid_location', with: 'a1'
       click_button 'Submit'
-      page.has_content?("Player 2 Turn").must_equal(true)
+      page.has_content?('Player 2 Turn').must_equal(true)
     end
   end
 end

@@ -1,6 +1,8 @@
 require 'sinatra/base'
 require_relative 'game.rb'
 
+game = Game.new
+
 class TicTacToe < Sinatra::Base
   enable :sessions
 

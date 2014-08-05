@@ -1,6 +1,8 @@
 require 'sinatra/base'
 require_relative 'game.rb'
 
+game = Game.new
+
 class TicTacToe < Sinatra::Base
   enable :sessions
 
@@ -14,23 +16,26 @@ class TicTacToe < Sinatra::Base
 
   get '/game' do
     @grid    ||= session['grid']
-    @mode    ||= params[:mode]
+    @mode    ||= game.mode
     @message   = 'Welcome to the Fields of Strife'
     erb :game
   end
 
-  # fresh game
   post '/game' do
-
-    @game = Game.new
-    @mode           = session['mode'] || params[:mode]
-    @grid         ||= session['grid']
-
+    @mode ||= game.mode
+    @grid ||= session['grid']
 
     session['grid'] = @grid
     session['mode'] = @mode
     erb :game
   end
 
+  post '/game/move' do
+    @mode ||= game.mode
+    @grid ||= session['grid']
 
+    session['grid'] = @grid
+    session['mode'] = @mode
+    erb :game
+  end
 end

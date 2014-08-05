@@ -29,7 +29,7 @@
       </tr>
     </table>
     <% if @grid.has_value?(0) %>
-      <form method='post' action='/game'>
+      <form method='post' action='/game/move'>
         <label for='grid_location'>Grid Location</label>
         <input type='text' name='grid_location' id='grid_location' />
         <input type='submit' value='Submit' />

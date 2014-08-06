@@ -7,8 +7,8 @@
       <%= '<h2>Player vs CPU. Good luck!</h2>' %>
     <% end %>
 
-    <% if @grid_location && !@grid_location.empty? %>
-      <%= "Your movement was #{@grid_location}." %>
+    <% if @grid_position && !@grid_position.empty? %>
+      <%= "Your movement was #{@grid_position}." %>
     <% end %>
 
     <table id='grid'>
@@ -30,8 +30,8 @@
     </table>
     <% if @grid.has_value?(0) %>
       <form method='post' action='/game/move'>
-        <label for='grid_location'>Grid Location</label>
-        <input type='text' name='grid_location' id='grid_location' />
+        <label for='grid_position'>Grid position</label>
+        <input type='text' name='grid_position' id='grid_position' />
         <input type='submit' value='Submit' />
       </form>
     <% end %>

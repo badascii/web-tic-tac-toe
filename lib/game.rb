@@ -15,61 +15,38 @@ class Game
     ['a3', 'b2', 'c1']  #   diagonal win 7
     ]
 
-
   POSITION_REGEX         = /[abc][1-3]/
   POSITION_REGEX_REVERSE = /[1-3][abc]/
 
-  def initialize
-    @player_1       = 'X'
-    @player_2       = 'O'
-    @cpu            = 'O'
-    @player_turn    = @player_1
+  attr_accessor :session
 
-    if @mode == 'cpu'
-      if valid_position_format?(@player_input) && @grid[@player_input] == 0
-        @grid[@player_input] = @player_1
-        @message = 'Movement accepted.'
-      elsif valid_position_format?(@player_input)
-        @message = 'Invalid input. That position is taken.'
-      else
-        @message = 'Invalid input. Please try again.'
-      end
-      if win?(@player_1)
-        @message = 'Congratulations. You win!'
-      elsif win?(@cpu)
-        @message = 'You lose. Really?'
-      end
-    elsif @mode == 'human'
-      if valid_position_format?(@player_input) && @grid[@player_input] == 0
-        if @player_turn == @player_1
-          @grid[@player_input] = @player_1
-          @message = 'Movement accepted.'
-        elsif @player_turn == @player_2
-          @grid[@player_input] = @player_2
-          @message = 'Movement accepted.'
-        end
-      elsif valid_position_format?(@player_input)
-        @message = 'Invalid input. That position is taken.'
-      else
-        @message = 'Invalid input. Please try again.'
-      end
-    end
-
-    if win?(@player_1)
-      @message = 'Congratulations. You win!'
-    elsif win?(@cpu)
-      @message = 'You lose. Really?'
-    end
+  def initialize(session)
+    @player_1 = 'X'
+    @player_2 = 'O'
+    @cpu      = 'O'
+    @mode     = session['mode']
+    @turn     = session['turn']
+    @session  = session
   end
 
   private
 
-  def cpu_match
-
+  def round(grid_position)
+    if mode == 'human'
+      get_player_input(grid_position)
+      switch_players
+    elsif mode == 'cpu'
+      get_player_input(grid_position)
+      cpu_turn
+    end
   end
 
-  def human_match
-
+  def switch_players
+    if turn == 'X'
+      turn = 'O'
+    elsif turn == 'O'
+      turn = 'X'
+    end
   end
 
   def get_player_input(player, position)

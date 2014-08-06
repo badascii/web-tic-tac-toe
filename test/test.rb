@@ -42,13 +42,13 @@ describe TicTacToe do
     end
 
     it 'should accept player input' do
-      fill_in 'grid_location', with: 'c2'
+      fill_in 'grid_position', with: 'c2'
       click_button 'Submit'
       page.has_content?('Movement accepted.').must_equal(true)
     end
 
     it 'should record player input on the grid' do
-      fill_in 'grid_location', with: 'c2'
+      fill_in 'grid_position', with: 'c2'
       click_button 'Submit'
       within('#c2') do
         page.has_content?('X').must_equal(true)
@@ -56,7 +56,7 @@ describe TicTacToe do
     end
 
     it 'should not allow incorrect input' do
-      fill_in 'grid_location', with: 'f5'
+      fill_in 'grid_position', with: 'f5'
       click_button 'Submit'
       within('#grid') do
         page.has_content?('X').must_equal(false)
@@ -65,9 +65,9 @@ describe TicTacToe do
     end
 
     it 'should only allow input for open spaces' do
-      fill_in 'grid_location', with: 'c2'
+      fill_in 'grid_position', with: 'c2'
       click_button 'Submit'
-      fill_in 'grid_location', with: 'c2'
+      fill_in 'grid_position', with: 'c2'
       click_button 'Submit'
       page.has_content?('Invalid input. That position is taken.').must_equal(true)
     end
@@ -86,7 +86,7 @@ describe TicTacToe do
     end
 
     it 'should place the initial CPU move in B2 if open' do
-      fill_in 'grid_location', with: 'a1'
+      fill_in 'grid_position', with: 'a1'
       click_button 'Submit'
       within('#b2') do
         page.has_content?('O').must_equal(true)
@@ -94,19 +94,19 @@ describe TicTacToe do
     end
 
     it 'should place winning CPU moves' do
-      fill_in 'grid_location', with: 'a1'
+      fill_in 'grid_position', with: 'a1'
       click_button 'Submit'
-      fill_in 'grid_location', with: 'a2'
+      fill_in 'grid_position', with: 'a2'
       click_button 'Submit'
-      fill_in 'grid_location', with: 'c3'
+      fill_in 'grid_position', with: 'c3'
       click_button 'Submit'
       page.has_content?('You lose. Really?').must_equal(true)
     end
 
     it 'should place loss-preventing CPU moves' do
-      fill_in 'grid_location', with: 'b2'
+      fill_in 'grid_position', with: 'b2'
       click_button 'Submit'
-      fill_in 'grid_location', with: 'a2'
+      fill_in 'grid_position', with: 'a2'
       click_button 'Submit'
       within('#c2') do
         page.has_content?('O').must_equal(true)
@@ -114,9 +114,9 @@ describe TicTacToe do
     end
 
     it 'should place strategic CPU moves in the absense of other conditions' do
-      fill_in 'grid_location', with: 'c3'
+      fill_in 'grid_position', with: 'c3'
       click_button 'Submit'
-      fill_in 'grid_location', with: 'a2'
+      fill_in 'grid_position', with: 'a2'
       click_button 'Submit'
       within('#b1') do
         page.has_content?('O').must_equal(true)
@@ -124,11 +124,11 @@ describe TicTacToe do
     end
 
     it 'should place CPU corner moves in specific game states' do
-      fill_in 'grid_location', with: 'c3'
+      fill_in 'grid_position', with: 'c3'
       click_button 'Submit'
-      fill_in 'grid_location', with: 'b1'
+      fill_in 'grid_position', with: 'b1'
       click_button 'Submit'
-      fill_in 'grid_location', with: 'a2'
+      fill_in 'grid_position', with: 'a2'
       click_button 'Submit'
       within('#a1') do
         page.has_content?('O').must_equal(true)
@@ -136,9 +136,9 @@ describe TicTacToe do
     end
 
     it 'should place CPU side moves in specific game states' do
-      fill_in 'grid_location', with: 'c3'
+      fill_in 'grid_position', with: 'c3'
       click_button 'Submit'
-      fill_in 'grid_location', with: 'b1'
+      fill_in 'grid_position', with: 'b1'
       click_button 'Submit'
       within('#c2') do
         page.has_content?('O').must_equal(true)
@@ -146,9 +146,9 @@ describe TicTacToe do
     end
 
     it 'should have the CPU defend against opposite corner opening moves' do
-      fill_in 'grid_location', with: 'a1'
+      fill_in 'grid_position', with: 'a1'
       click_button 'Submit'
-      fill_in 'grid_location', with: 'c3'
+      fill_in 'grid_position', with: 'c3'
       click_button 'Submit'
       within('#a2') do
         page.has_content?('O').must_equal(true)
@@ -170,7 +170,7 @@ describe TicTacToe do
 
     it 'should display whose turn it is' do
       page.has_content?('Player 1 Turn').must_equal(true)
-      fill_in 'grid_location', with: 'a1'
+      fill_in 'grid_position', with: 'a1'
       click_button 'Submit'
       page.has_content?('Player 2 Turn').must_equal(true)
     end

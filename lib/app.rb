@@ -24,8 +24,8 @@ class TicTacToe < Sinatra::Base
     @player_move = params[:grid_position]
     game.round(@player_move)
     session['grid'] = game.grid
-    @mode    = game.mode
     @grid    = game.grid
+    @mode    = game.mode
     @message = game.message
     erb :game
   end

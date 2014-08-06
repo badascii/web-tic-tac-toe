@@ -42,10 +42,10 @@ class Game
   private
 
   def switch_players
-    if @turn == 'X'
-      @turn = 'O'
-    elsif @turn == 'O'
-      @turn = 'X'
+    if @turn == @player_1
+      @turn = @player_2
+    elsif @turn == @player_2
+      @turn = @player_1
     end
   end
 

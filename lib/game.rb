@@ -50,8 +50,9 @@ class Game
   end
 
   def get_player_input(position)
-    if valid_position_format?(position) && @grid[position] == 0
+    if (valid_position_format?(position)) && (@grid[position] == 0)
       @grid[position] = @turn
+      @message = 'Movement accepted.'
       switch_players
     elsif valid_position_format?(position)
       @message = 'Invalid input. That position is taken.'

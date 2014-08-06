@@ -61,7 +61,7 @@ describe TicTacToe do
       within('#grid') do
         page.has_content?('X').must_equal(false)
       end
-      page.has_content?('Invalid input. Please try again.').must_equal(true)
+      page.has_content?('Invalid input. That is not a valid position.').must_equal(true)
     end
 
     it 'should only allow input for open spaces' do

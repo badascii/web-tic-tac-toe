@@ -20,13 +20,10 @@ class Game
   POSITION_REGEX_REVERSE = /[1-3][abc]/
 
   def initialize
-
     @player_1       = 'X'
     @player_2       = 'O'
     @cpu            = 'O'
     @player_turn    = @player_1
-    @player_input ||= params[:grid_location]
-    @mode           = session['mode'] || params[:mode]
 
     if @mode == 'cpu'
       if valid_position_format?(@player_input) && @grid[@player_input] == 0
@@ -67,16 +64,22 @@ class Game
 
   private
 
-  def get_player_input(player)
-    position = player_input_prompt
-    until valid_position_format?(position) && @grid[position] == 0
+  def cpu_match
+
+  end
+
+  def human_match
+
+  end
+
+  def get_player_input(player, position)
+    if valid_position_format?(position) && !(@grid[position] == 0)
       message = nil
       if valid_position_format?(position)
         message = "Invalid input. That position is taken."
       else
         message = "Invalid input. That is not a valid position."
       end
-      position = player_input_prompt(message)
     end
     @grid[position] = player
   end

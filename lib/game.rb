@@ -1,8 +1,8 @@
 class Game
 
   GRID = {'a1' => 0, 'b1' => 0, 'c1' => 0,
-            'a2' => 0, 'b2' => 0, 'c2' => 0,
-            'a3' => 0, 'b3' => 0, 'c3' => 0}
+          'a2' => 0, 'b2' => 0, 'c2' => 0,
+          'a3' => 0, 'b3' => 0, 'c3' => 0}
 
   WIN_CONDITIONS = [
     ['a1', 'a2', 'a3'], #   vertical win 0
@@ -18,42 +18,45 @@ class Game
   POSITION_REGEX         = /[abc][1-3]/
   POSITION_REGEX_REVERSE = /[1-3][abc]/
 
-  attr_accessor :session
+  attr_accessor :grid, :player_1, :player_2, :cpu, :mode, :message
 
-  def initialize
+  def initialize(session)
     @player_1 = 'X'
     @player_2 = 'O'
     @cpu      = 'O'
-    @session  = session
+    @grid     = session['grid']
+    @mode     = session['mode']
+    @turn     = session['turn']
+    @message  = session['message']
   end
 
-  private
-
   def round(position)
-    if @session['mode'] == 'human'
+    if @mode == 'human'
       get_player_input(position)
-    elsif @session['mode'] == 'cpu'
+    elsif @mode == 'cpu'
       get_player_input(position)
       cpu_turn
     end
   end
 
+  private
+
   def switch_players
-    if @session['turn'] == 'X'
-      @session['turn'] = 'O'
-    elsif @session['turn'] == 'O'
-      @session['turn'] = 'X'
+    if @turn == 'X'
+      @turn = 'O'
+    elsif @turn == 'O'
+      @turn = 'X'
     end
   end
 
   def get_player_input(position)
-    if valid_position_format?(position) && @session['grid'][position] == 0
-      @session['grid'][position] = @session['turn']
+    if valid_position_format?(position) && @grid[position] == 0
+      @grid[position] = @turn
       switch_players
     elsif valid_position_format?(position)
-      @session['message'] = 'Invalid input. That position is taken.'
+      @message = 'Invalid input. That position is taken.'
     else
-      @session['message'] = 'Invalid input. That is not a valid position.'
+      @message = 'Invalid input. That is not a valid position.'
     end
   end
 
@@ -184,7 +187,4 @@ class Game
   def opposite_corners?
     (@grid['a1'] == @player_1 && @grid['c3'] == @player_1) || (@grid['a3'] == @player_1 && @grid['c1'] == @player_1)
   end
-
 end
-
-

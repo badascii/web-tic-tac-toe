@@ -67,6 +67,20 @@ class Game
 
   private
 
+  def get_player_input(player)
+    position = player_input_prompt
+    until valid_position_format?(position) && @grid[position] == 0
+      message = nil
+      if valid_position_format?(position)
+        message = "Invalid input. That position is taken."
+      else
+        message = "Invalid input. That is not a valid position."
+      end
+      position = player_input_prompt(message)
+    end
+    @grid[position] = player
+  end
+
   def valid_position_format?(position)
     (position =~ POSITION_REGEX) || (position =~ POSITION_REGEX_REVERSE)
   end

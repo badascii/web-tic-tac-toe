@@ -33,6 +33,18 @@ class TicTacToe < Sinatra::Base
   post '/game/move' do
     @mode ||= game.mode
     @grid ||= session['grid']
+    @turn ||= game.player_1
+
+    if @mode == 'human'
+      if @turn == game.player_1
+        game.get_player_input(game.player_1)
+      elsif @turn == game.player_2
+        game.get_player_input(game.player_2)
+      end
+    elsif @mode == 'cpu'
+      game.get_player_input(game.player_1)
+      game.cpu_turn
+    end
 
     session['grid'] = @grid
     session['mode'] = @mode

@@ -6,10 +6,12 @@ game = Game.new
 class TicTacToe < Sinatra::Base
   enable :sessions
 
+
   before do
     session['grid']        ||= GRID
     session['active_turn'] ||= game.player_1
   end
+
 
   get '/' do
     erb :index
@@ -17,24 +19,26 @@ class TicTacToe < Sinatra::Base
 
   get '/game' do
     @grid    ||= session['grid']
-    @mode    ||= game.mode
     @message   = 'Choose a game mode'
     erb :game
   end
 
   post '/game' do
-    @mode    ||= game.mode
+    @mode    ||= params[:mode]
     @grid    ||= session['grid']
     @message   = 'Welcome to the Fields of Strife'
+    session['mode'] = @mode
+    game.session = session
     erb :game
   end
 
   post '/game/move' do
-    @mode ||= game.mode
-    @grid ||= session['grid']
+    game.session = session
+    @mode    ||= session['mode']
+    @grid    ||= session['grid']
+    @message ||= session['message']
     player_move = params[:grid_position]
 
-    game.session = session
     game.round(player_move)
     erb :game
     session = game.session

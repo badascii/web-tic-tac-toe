@@ -24,40 +24,36 @@ class Game
     @player_1 = 'X'
     @player_2 = 'O'
     @cpu      = 'O'
-    @mode     = session['mode']
-    @message  = session['message']
-    @turn     = session['turn']
     @session  = session
   end
 
   private
 
   def round(position)
-    if mode == 'human'
+    if @session['mode'] == 'human'
       get_player_input(position)
-    elsif mode == 'cpu'
+    elsif @session['mode'] == 'cpu'
       get_player_input(position)
       cpu_turn
     end
   end
 
   def switch_players
-    if turn == 'X'
-      turn = 'O'
-    elsif turn == 'O'
-      turn = 'X'
+    if @session['turn'] == 'X'
+      @session['turn'] = 'O'
+    elsif @session['turn'] == 'O'
+      @session['turn'] = 'X'
     end
   end
 
   def get_player_input(position)
-    position = player_input_prompt
-    if valid_position_format?(position) && @grid[position] == 0
-      grid[position] = turn
+    if valid_position_format?(position) && @session['grid'][position] == 0
+      @session['grid'][position] = @session['turn']
       switch_players
     elsif valid_position_format?(position)
-      message = "Invalid input. That position is taken."
+      @session['message'] = 'Invalid input. That position is taken.'
     else
-      message = "Invalid input. That is not a valid position."
+      @session['message'] = 'Invalid input. That is not a valid position.'
     end
   end
 

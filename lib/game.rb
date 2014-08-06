@@ -20,7 +20,7 @@ class Game
 
   attr_accessor :session
 
-  def initialize(session)
+  def initialize
     @player_1 = 'X'
     @player_2 = 'O'
     @cpu      = 'O'

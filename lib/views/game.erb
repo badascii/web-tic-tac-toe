@@ -1,14 +1,14 @@
 <html>
   <body>
-    <h1>Tic-Tac-Toe <%= @mode %></h1>
+    <h1>Tic-Tac-Toe</h1>
     <% if @mode == 'human' %>
       <%= '<h2>Player vs Player. Fight!</h2>' %>
     <% elsif @mode == 'cpu' %>
       <%= '<h2>Player vs CPU. Good luck!</h2>' %>
     <% end %>
 
-    <% if @grid_position && !@grid_position.empty? %>
-      <%= "Your movement was #{@grid_position}." %>
+    <% if @player_move && !@player_move.empty? %>
+      <%= "Your movement was #{@player_move}." %>
     <% end %>
 
     <table id='grid'>

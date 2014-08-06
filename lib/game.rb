@@ -26,7 +26,7 @@ class Game
     @cpu      = 'O'
     @grid     = session['grid']
     @mode     = session['mode']
-    @turn     = session['turn']
+    @turn     = session['turn'] || @player_1
     @message  = session['message']
   end
 

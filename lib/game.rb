@@ -34,17 +34,19 @@ class Game
   def round(position)
     if @mode == 'human'
       get_player_input(position)
+      if win?(@player_1)
+        @result = "#{@player_1} wins! Congrats!"
+      elsif win?(@cpu)
+        @result = "#{@player_2} wins! Congrats!"
+      end
     elsif @mode == 'cpu'
       get_player_input(position)
       cpu_turn
-    end
-  end
-
-  def result
-    if win?('X')
-      @result = 'X'
-    elsif win?('O')
-      @result = 'O'
+      if win?(@player_1)
+        @result = 'You win. Congrats!'
+      elsif win?(@cpu)
+        @result = 'You lose. Really?'
+      end
     end
   end
 

@@ -27,6 +27,7 @@ class TicTacToe < Sinatra::Base
     @grid    = game.grid
     @mode    = game.mode
     @message = game.message
+    @result  = game.result
     erb :game
   end
 end

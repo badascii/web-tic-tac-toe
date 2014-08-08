@@ -7,6 +7,8 @@
       <%= '<h2>Player vs CPU. Good luck!</h2>' %>
     <% end %>
 
+    <%= "<h2>#{@result}<h2>" %>
+
     <% if @player_move && !@player_move.empty? %>
       <%= "Your movement was #{@player_move}." %>
     <% end %>

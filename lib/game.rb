@@ -18,7 +18,7 @@ class Game
   POSITION_REGEX         = /[abc][1-3]/
   POSITION_REGEX_REVERSE = /[1-3][abc]/
 
-  attr_accessor :grid, :player_1, :player_2, :cpu, :mode, :message
+  attr_accessor :grid, :player_1, :player_2, :cpu, :mode, :message, :result
 
   def initialize(session)
     @player_1 = 'X'
@@ -28,6 +28,7 @@ class Game
     @mode     = session['mode']
     @turn     = session['turn'] || @player_1
     @message  = session['message']
+    @result   = result
   end
 
   def round(position)
@@ -40,14 +41,10 @@ class Game
   end
 
   def result
-    if win?(@player_1)
-      @result = "#{@player_1} wins! Congrats!"
-    elsif win?(@player_2)
-      @result = "#{@player_2} wins! Congrats!"
-    elsif win?(@cpu)
-      @result = 'You lose. Really?'
-    elsif grid_full?
-      @result = 'Stalemate'
+    if win?('X')
+      @result = 'X'
+    elsif win?('O')
+      @result = 'O'
     end
   end
 

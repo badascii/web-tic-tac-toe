@@ -39,6 +39,18 @@ class Game
     end
   end
 
+  def result
+    if win?(@player_1)
+      @result = "#{@player_1} wins! Congrats!"
+    elsif win?(@player_2)
+      @result = "#{@player_2} wins! Congrats!"
+    elsif win?(@cpu)
+      @result = 'You lose. Really?'
+    elsif grid_full?
+      @result = 'Stalemate'
+    end
+  end
+
   private
 
   def switch_players
@@ -63,6 +75,10 @@ class Game
 
   def valid_position_format?(position)
     (position =~ POSITION_REGEX) || (position =~ POSITION_REGEX_REVERSE)
+  end
+
+  def grid_full?
+    !@grid.has_value?(0)
   end
 
   def win?(mark)

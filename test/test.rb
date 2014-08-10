@@ -85,10 +85,6 @@ describe TicTacToe do
       page.has_content?('Player vs CPU').must_equal(true)
     end
 
-    it 'should display whose turn it is' do
-      page.has_content?('CPU Turn').must_equal(true)
-    end
-
     it 'should place the initial CPU move in B2 if open' do
       fill_in 'grid_position', with: 'a1'
       click_button 'Submit'

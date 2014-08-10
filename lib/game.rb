@@ -18,7 +18,7 @@ class Game
   POSITION_REGEX         = /[abc][1-3]/
   POSITION_REGEX_REVERSE = /[1-3][abc]/
 
-  attr_accessor :grid, :player_1, :player_2, :cpu, :mode, :message, :result
+  attr_accessor :grid, :player_1, :player_2, :cpu, :mode, :turn, :message, :result
 
   def initialize(session)
     @player_1 = 'X'

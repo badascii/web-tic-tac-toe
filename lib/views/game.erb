@@ -7,6 +7,12 @@
       <%= '<h2>Player vs CPU. Good luck!</h2>' %>
     <% end %>
 
+    <% if @turn == @player_1 %>
+      <%= '<h3>Player 1 Turn</h3>' %>
+    <% elsif @turn == @player_2 %>
+      <%= '<h3>Player 2 Turn</h3>' %>
+    <% end %>
+
     <%= "<h2>#{@result}<h2>" %>
 
     <% if @player_move && !@player_move.empty? %>

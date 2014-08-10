@@ -175,4 +175,15 @@ describe TicTacToe do
       page.has_content?('Player 2 Turn').must_equal(true)
     end
   end
+
+  describe 'result' do
+    before do
+      Capybara.reset_sessions!
+      visit '/game/result'
+    end
+
+    it 'should visit the result page' do
+      page.status_code.must_equal(200)
+    end
+  end
 end

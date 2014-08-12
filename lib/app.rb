@@ -34,4 +34,9 @@ class TicTacToe < Sinatra::Base
     @result   = game.result
     erb :game
   end
+
+  get '/game/result' do
+    @result = game.result
+    erb :result
+  end
 end

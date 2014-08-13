@@ -38,6 +38,8 @@ class Game
         @result = "#{@player_1} wins! Congrats!"
       elsif win?(@cpu)
         @result = "#{@player_2} wins! Congrats!"
+      elsif grid_full?
+        @result = 'Stalemate'
       end
     elsif @mode == 'cpu'
       get_player_input(position)
@@ -46,6 +48,8 @@ class Game
         @result = 'You win. Congrats!'
       elsif win?(@cpu)
         @result = 'You lose. Really?'
+      elsif grid_full?
+        @result = 'Stalemate'
       end
     end
   end

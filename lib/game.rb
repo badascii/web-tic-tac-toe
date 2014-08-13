@@ -54,10 +54,6 @@ class Game
     end
   end
 
-  def grid_full?
-    !@grid.has_value?(0)
-  end
-
   private
 
   def switch_players
@@ -82,6 +78,10 @@ class Game
 
   def valid_position_format?(position)
     (position =~ POSITION_REGEX) || (position =~ POSITION_REGEX_REVERSE)
+  end
+
+  def grid_full?
+    !@grid.has_value?(0)
   end
 
   def win?(mark)

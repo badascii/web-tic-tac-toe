@@ -31,9 +31,10 @@ class TicTacToe < Sinatra::Base
     @mode     = game.mode
     @turn     = game.turn
     @message  = game.message
-    @result   = game.result
+    @result   = nil || game.result
 
     if @result
+      session['result'] = @result
       redirect '/game/result'
     end
 
@@ -41,7 +42,7 @@ class TicTacToe < Sinatra::Base
   end
 
   get '/game/result' do
-    @result = game.result
+    @result = session['result']
     erb :result
   end
 end

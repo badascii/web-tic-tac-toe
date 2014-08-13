@@ -102,6 +102,10 @@ describe TicTacToe do
     it 'should place the initial CPU move in B2 if open' do
       fill_in 'grid_position', with: 'a1'
       click_button 'Submit'
+
+      within('#a1') do
+        page.has_content?('X').must_equal(true)
+      end
       within('#b2') do
         page.has_content?('O').must_equal(true)
       end
@@ -213,6 +217,28 @@ describe TicTacToe do
 
     it 'should visit the result page' do
       page.status_code.must_equal(200)
+    end
+  end
+
+  describe 'consecutive games' do
+    it 'should reset game state' do
+      Capybara.reset_sessions!
+      visit '/'
+      choose('human')
+      click_button 'Start'
+      fill_in 'grid_position', with: 'a2'
+      click_button 'Submit'
+
+      visit '/'
+      choose('cpu')
+      click_button 'Start'
+      fill_in 'grid_position', with: 'c1'
+      click_button 'Submit'
+
+      within('#grid') do
+        page.has_content?('X').must_equal(true)
+        page.has_content?('O').must_equal(true)
+      end
     end
   end
 end

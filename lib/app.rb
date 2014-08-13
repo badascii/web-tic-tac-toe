@@ -6,6 +6,7 @@ class TicTacToe < Sinatra::Base
   enable :sessions
 
   get '/' do
+    session.clear
     erb :index
   end
 

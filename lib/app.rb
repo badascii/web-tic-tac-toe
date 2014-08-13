@@ -21,18 +21,20 @@ class TicTacToe < Sinatra::Base
   post '/game/move' do
     game = Game.new(session)
 
-    @player_move = params[:grid_position]
-    game.round(@player_move)
-    session['grid'] = game.grid
-    @player_1 = game.player_1
-    @player_2 = game.player_2
-    @cpu      = game.cpu
-    @grid     = game.grid
-    @mode     = game.mode
-    @turn     = game.turn
-    @message  = game.message
-    @result   = nil || game.result
+    @player_move    = params[:grid_position]
 
+    game.round(@player_move)
+
+    session['grid'] = game.grid
+    session['turn'] = game.turn
+    @player_1       = game.player_1
+    @player_2       = game.player_2
+    @cpu            = game.cpu
+    @grid           = game.grid
+    @turn           = game.turn
+    @mode           = game.mode
+    @message        = game.message
+    @result         = nil || game.result
     if @result
       session['result'] = @result
       redirect '/game/result'

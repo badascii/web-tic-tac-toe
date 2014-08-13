@@ -34,6 +34,7 @@ class Game
   def round(position)
     if @mode == 'human'
       get_player_input(position)
+      switch_turns
       if win?(@player_1)
         @result = "#{@player_1} wins! Congrats!"
       elsif win?(@cpu)
@@ -56,7 +57,7 @@ class Game
 
   private
 
-  def switch_players
+  def switch_turns
     if @turn == @player_1
       @turn = @player_2
     elsif @turn == @player_2
@@ -68,7 +69,6 @@ class Game
     if (valid_position_format?(position)) && (@grid[position] == 0)
       @grid[position] = @turn
       @message = 'Movement accepted.'
-      switch_players
     elsif valid_position_format?(position)
       @message = 'Invalid input. That position is taken.'
     else

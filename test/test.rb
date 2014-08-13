@@ -185,7 +185,14 @@ describe TicTacToe do
     it 'should record 2nd player input on the grid' do
       fill_in 'grid_position', with: 'c2'
       click_button 'Submit'
+      fill_in 'grid_position', with: 'a1'
+      click_button 'Submit'
+
       within('#c2') do
+        page.has_content?('X').must_equal(true)
+      end
+
+      within('#a1') do
         page.has_content?('O').must_equal(true)
       end
     end

@@ -71,6 +71,20 @@ describe TicTacToe do
       click_button 'Submit'
       page.has_content?('Invalid input. That position is taken.').must_equal(true)
     end
+
+    it 'should end the game when there is a stalemate' do
+      fill_in 'grid_position', with: 'b2'
+      click_button 'Submit'
+      fill_in 'grid_position', with: 'b1'
+      click_button 'Submit'
+      fill_in 'grid_position', with: 'a3'
+      click_button 'Submit'
+      fill_in 'grid_position', with: 'c2'
+      click_button 'Submit'
+      fill_in 'grid_position', with: 'c3'
+      click_button 'Submit'
+      page.has_content?('Stalemate').must_equal(true)
+    end
   end
 
   describe 'cpu match' do

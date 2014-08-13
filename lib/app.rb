@@ -32,6 +32,11 @@ class TicTacToe < Sinatra::Base
     @turn     = game.turn
     @message  = game.message
     @result   = game.result
+
+    if @result
+      redirect '/game/result'
+    end
+
     erb :game
   end
 

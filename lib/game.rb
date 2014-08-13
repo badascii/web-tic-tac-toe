@@ -28,7 +28,7 @@ class Game
     @mode     = session['mode']
     @turn     = session['turn'] || @player_1
     @message  = session['message']
-    @result   = result
+    @result   = nil
   end
 
   def round(position)
@@ -48,6 +48,10 @@ class Game
         @result = 'You lose. Really?'
       end
     end
+  end
+
+  def grid_full?
+    !@grid.has_value?(0)
   end
 
   private
@@ -74,10 +78,6 @@ class Game
 
   def valid_position_format?(position)
     (position =~ POSITION_REGEX) || (position =~ POSITION_REGEX_REVERSE)
-  end
-
-  def grid_full?
-    !@grid.has_value?(0)
   end
 
   def win?(mark)

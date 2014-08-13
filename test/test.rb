@@ -182,6 +182,14 @@ describe TicTacToe do
       page.has_content?('Player vs Player').must_equal(true)
     end
 
+    it 'should record 2nd player input on the grid' do
+      fill_in 'grid_position', with: 'c2'
+      click_button 'Submit'
+      within('#c2') do
+        page.has_content?('O').must_equal(true)
+      end
+    end
+
     it 'should display whose turn it is' do
       page.has_content?('Player 1 Turn').must_equal(true)
       fill_in 'grid_position', with: 'a1'

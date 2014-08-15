@@ -21,14 +21,14 @@ class Game
   attr_accessor :grid, :player_1, :player_2, :cpu, :mode, :turn, :message, :result
 
   def initialize(session)
-    @player_1 = 'X'
-    @player_2 = 'O'
-    @cpu      = 'O'
-    @grid     = session['grid']
-    @mode     = session['mode']
-    @turn     = session['turn'] || @player_1
-    @message  = session['message']
-    @result   = nil
+    @player_1    = 'X'
+    @player_2    = 'O'
+    @cpu         = 'O'
+    @grid        = session['grid']
+    @mode        = session['mode']
+    @turn        = session['turn'] || @player_1
+    @message     = nil
+    @result      = nil
   end
 
   def round(position)

@@ -25,9 +25,9 @@ class TicTacToe < Sinatra::Base
     @player_move = params[:grid_position]
     @grid        = @game.grid
     @mode        = @game.mode
-    @message     = @game.message
     @game.round(@player_move)
 
+    @message     = @game.message
     session['grid']    = @game.grid
     session['turn']    = @game.turn
     session['message'] = @game.message

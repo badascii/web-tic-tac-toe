@@ -28,8 +28,9 @@ class TicTacToe < Sinatra::Base
     @message     = @game.message
     @game.round(@player_move)
 
-    session['grid'] = @game.grid
-    session['turn'] = @game.turn
+    session['grid']    = @game.grid
+    session['turn']    = @game.turn
+    session['message'] = @game.message
     # @player_1       = game.player_1
     # @player_2       = game.player_2
     # @cpu            = game.cpu

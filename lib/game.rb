@@ -27,7 +27,7 @@ class Game
     @grid        = session['grid']
     @mode        = session['mode']
     @turn        = session['turn'] || @player_1
-    @message     = nil
+    @message     = session['message'] || nil
     @result      = nil
   end
 

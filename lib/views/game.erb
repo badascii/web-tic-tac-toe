@@ -12,6 +12,13 @@
       <%= '<h2>Player vs CPU. Good luck!</h2>' %>
     <% end %>
 
+    <% if @size == '3x3' %>
+      <%= '<h2>3x3</h2>' %>
+    <% elsif @size == '4x4' %>
+      <%= '<h2>4x4</h2>' %>
+    <% end %>
+
+
     <% if @player_move && !@player_move.empty? %>
       <%= "Your movement was #{@player_move}." %>
     <% end %>

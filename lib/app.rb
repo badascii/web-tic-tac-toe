@@ -15,8 +15,10 @@ class TicTacToe < Sinatra::Base
     @game    = Game.new(session)
     @grid    = session['grid']
     @mode    = params[:mode]
+    @size    = params[:size]
     @message = 'Welcome to the Fields of Strife'
     session['mode'] = @mode
+    session['size'] = @size
     erb :game
   end
 
@@ -25,6 +27,7 @@ class TicTacToe < Sinatra::Base
     @player_move = params[:grid_position]
     @grid        = @game.grid
     @mode        = @game.mode
+    @size        = @game.size
     @game.round(@player_move)
 
     @message     = @game.message

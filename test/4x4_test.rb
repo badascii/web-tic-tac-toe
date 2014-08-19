@@ -22,10 +22,13 @@ describe TicTacToe do
       page.has_button?('Start').must_equal(true)
     end
 
+
     it 'should allow the user to choose their opponent' do
       choose('human')
+      choose('4x4')
       click_button 'Start'
       page.has_content?('Player vs Player').must_equal(true)
+      page.has_content?('4x4').must_equal(true)
     end
   end
 

@@ -20,15 +20,15 @@ class Game3x3
 
   attr_accessor :grid, :player_1, :player_2, :cpu, :mode, :size, :turn, :message, :result
 
-  def initialize(session)
+  def initialize(opts)
     @player_1    = 'X'
     @player_2    = 'O'
     @cpu         = 'O'
-    @grid        = session['grid']
-    @mode        = session['mode']
-    @size        = session['size']
-    @turn        = session['turn'] || @player_1
-    @message     = session['message']
+    @grid        = opts[:grid]
+    @mode        = opts[:mode]
+    @size        = opts[:size]
+    @turn        = opts[:turn] || @player_1
+    @message     = opts[:message]
     @result      = nil
   end
 

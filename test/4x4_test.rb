@@ -37,6 +37,7 @@ describe TicTacToe do
       Capybara.reset_sessions!
       visit '/'
       choose('cpu')
+      choose('4x4')
       click_button 'Start'
     end
 
@@ -95,6 +96,7 @@ describe TicTacToe do
       Capybara.reset_sessions!
       visit '/'
       choose('cpu')
+      choose('4x4')
       click_button 'Start'
     end
 
@@ -182,6 +184,7 @@ describe TicTacToe do
       Capybara.reset_sessions!
       visit '/'
       choose('human')
+      choose('4x4')
       click_button 'Start'
     end
 
@@ -228,12 +231,14 @@ describe TicTacToe do
       Capybara.reset_sessions!
       visit '/'
       choose('human')
+      choose('4x4')
       click_button 'Start'
       fill_in 'grid_position', with: 'a2'
       click_button 'Submit'
 
       visit '/'
       choose('cpu')
+      choose('4x4')
       click_button 'Start'
       fill_in 'grid_position', with: 'c1'
       click_button 'Submit'

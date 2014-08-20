@@ -28,17 +28,32 @@
         <td id='a1'> <%= @grid['a1'] %> </td>
         <td id='b1'> <%= @grid['b1'] %> </td>
         <td id='c1'> <%= @grid['c1'] %> </td>
+        <% if @grid['d1'] %>
+          <td id='d1'> <%= @grid['d1'] %> </td>
+        <% end %>
       </tr>
       <tr>
         <td id='a2'> <%= @grid['a2'] %> </td>
         <td id='b2'> <%= @grid['b2'] %> </td>
         <td id='c2'> <%= @grid['c2'] %> </td>
+        <% if @grid['d2'] %>
+          <td id='d1'> <%= @grid['d2'] %> </td>
+        <% end %>
       </tr>
       <tr>
         <td id='a3'> <%= @grid['a3'] %> </td>
         <td id='b3'> <%= @grid['b3'] %> </td>
         <td id='c3'> <%= @grid['c3'] %> </td>
+        <% if @grid['d3'] %>
+          <td id='d3'> <%= @grid['d3'] %> </td>
+        <% end %>
       </tr>
+      <% if @grid['a4'] %>
+        <td id='a4'> <%= @grid['a4'] %> </td>
+        <td id='b4'> <%= @grid['b4'] %> </td>
+        <td id='c4'> <%= @grid['c4'] %> </td>
+        <td id='d4'> <%= @grid['d4'] %> </td>
+      <% end %>
     </table>
     <% if @grid.has_value?(0) %>
       <form method='post' action='/game/move'>

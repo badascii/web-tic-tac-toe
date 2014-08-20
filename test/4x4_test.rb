@@ -87,6 +87,15 @@ describe TicTacToe do
       click_button 'Submit'
       fill_in 'grid_position', with: 'c3'
       click_button 'Submit'
+      fill_in 'grid_position', with: 'b3'
+      click_button 'Submit'
+      fill_in 'grid_position', with: 'd2'
+      click_button 'Submit'
+      fill_in 'grid_position', with: 'c4'
+      click_button 'Submit'
+      fill_in 'grid_position', with: 'd4'
+      click_button 'Submit'
+
       page.has_content?('Stalemate').must_equal(true)
     end
   end

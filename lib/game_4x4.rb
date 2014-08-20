@@ -148,7 +148,7 @@ class Game4x4
         open_space = true if position_empty?(position)
         occupied_spaces << position if @grid[position] == mark
       end
-      if occupied_spaces.length == 2 && open_space == true
+      if occupied_spaces.length == 3 && open_space == true
         move = condition - occupied_spaces
         return move.first
       end
@@ -201,7 +201,7 @@ class Game4x4
   end
 
   def side_defense?
-    corner_positions = [@grid['a1'], @grid['a3'], @grid['c1'], @grid['c3']]
+    corner_positions = [@grid['a1'], @grid['a4'], @grid['c1'], @grid['c4']]
     side_positions   = [@grid['a2'], @grid['b1'], @grid['b3'], @grid['c2']]
     (@grid['b2'] == @cpu) && (corner_positions.uniq.count == 2) && (side_positions.uniq.count == 3)
   end
@@ -219,6 +219,6 @@ class Game4x4
   end
 
   def opposite_corners?
-    (@grid['a1'] == @player_1 && @grid['c3'] == @player_1) || (@grid['a3'] == @player_1 && @grid['c1'] == @player_1)
+    (@grid['a1'] == @player_1 && @grid['c4'] == @player_1) || (@grid['a4'] == @player_1 && @grid['c1'] == @player_1)
   end
 end

@@ -123,6 +123,9 @@ describe TicTacToe do
       click_button 'Submit'
       fill_in 'grid_position', with: 'c3'
       click_button 'Submit'
+      fill_in 'grid_position', with: 'c4'
+      click_button 'Submit'
+
       page.has_content?('You lose. Really?').must_equal(true)
     end
 
@@ -131,7 +134,10 @@ describe TicTacToe do
       click_button 'Submit'
       fill_in 'grid_position', with: 'a2'
       click_button 'Submit'
-      within('#c2') do
+      fill_in 'grid_position', with: 'c2'
+      click_button 'Submit'
+
+      within('#d2') do
         page.has_content?('O').must_equal(true)
       end
     end

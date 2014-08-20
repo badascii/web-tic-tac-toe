@@ -6,14 +6,16 @@ class Game4x4
           'a4' => 0, 'b4' => 0, 'c4' => 0, 'd4' => 0}
 
   WIN_CONDITIONS = [
-    ['a1', 'a2', 'a3', 'a4'], #   vertical win 0
-    ['b1', 'b2', 'b3', 'b4'], #   vertical win 1
-    ['c1', 'c2', 'c3', 'c4'], #   vertical win 2
-    ['a1', 'b1', 'c1', 'd1'], # horizontal win 3
-    ['a2', 'b2', 'c2', 'd2'], # horizontal win 4
-    ['a3', 'b3', 'c3', 'd3'], # horizontal win 5
-    ['a1', 'b2', 'c3', 'd4'], #   diagonal win 6
-    ['a4', 'b3', 'c2', 'd1']  #   diagonal win 7
+    ['a1', 'a2', 'a3', 'a4'], # 0 vertical win
+    ['b1', 'b2', 'b3', 'b4'], # 1 vertical win
+    ['c1', 'c2', 'c3', 'c4'], # 2 vertical win
+    ['d1', 'd2', 'd3', 'd4'], # 3 vertical win
+    ['a1', 'b1', 'c1', 'd1'], # 4 horizontal win
+    ['a2', 'b2', 'c2', 'd2'], # 5 horizontal win
+    ['a3', 'b3', 'c3', 'd3'], # 6 horizontal win
+    ['a4', 'b4', 'c4', 'd4'], # 7 horizontal win
+    ['a1', 'b2', 'c3', 'd4'], # 8 diagonal win
+    ['a4', 'b3', 'c2', 'd1']  # 9 diagonal win
     ]
 
   POSITION_REGEX         = /[abcd][1-4]/
@@ -90,20 +92,30 @@ class Game4x4
     vertical_win?(mark) || horizontal_win?(mark) || diagonal_win?(mark)
   end
 
-  def horizontal_win?(mark)
-    three_in_a_row?(mark, WIN_CONDITIONS[3]) || three_in_a_row?(mark, WIN_CONDITIONS[4]) || three_in_a_row?(mark, WIN_CONDITIONS[5])
+  def vertical_win?(mark)
+    four_in_a_row?(mark, WIN_CONDITIONS[0]) ||
+    four_in_a_row?(mark, WIN_CONDITIONS[1]) ||
+    four_in_a_row?(mark, WIN_CONDITIONS[2]) ||
+    four_in_a_row?(mark, WIN_CONDITIONS[3])
   end
 
-  def vertical_win?(mark)
-    three_in_a_row?(mark, WIN_CONDITIONS[0]) || three_in_a_row?(mark, WIN_CONDITIONS[1]) || three_in_a_row?(mark, WIN_CONDITIONS[2])
+  def horizontal_win?(mark)
+    four_in_a_row?(mark, WIN_CONDITIONS[4]) ||
+    four_in_a_row?(mark, WIN_CONDITIONS[5]) ||
+    four_in_a_row?(mark, WIN_CONDITIONS[6]) ||
+    four_in_a_row?(mark, WIN_CONDITIONS[7])
   end
 
   def diagonal_win?(mark)
-    three_in_a_row?(mark, WIN_CONDITIONS[6]) || three_in_a_row?(mark, WIN_CONDITIONS[7])
+    four_in_a_row?(mark, WIN_CONDITIONS[8]) ||
+    four_in_a_row?(mark, WIN_CONDITIONS[9])
   end
 
-  def three_in_a_row?(mark, win_condition)
-    (@grid[win_condition[0]] == mark) && (@grid[win_condition[1]] == mark) && (@grid[win_condition[2]] == mark)
+  def four_in_a_row?(mark, win_condition)
+    (@grid[win_condition[0]] == mark) &&
+    (@grid[win_condition[1]] == mark) &&
+    (@grid[win_condition[2]] == mark) &&
+    (@grid[win_condition[3]] == mark)
   end
 
   def cpu_turn

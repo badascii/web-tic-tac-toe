@@ -1,6 +1,6 @@
 require 'sinatra/base'
-require_relative 'game.rb'
-
+require_relative 'game_3x3.rb'
+require_relative 'game_4x4.rb'
 
 class TicTacToe < Sinatra::Base
   enable :sessions
@@ -11,8 +11,12 @@ class TicTacToe < Sinatra::Base
   end
 
   post '/game' do
-    session['grid'] = Game::GRID
-    @game    = Game.new(session)
+    if params[:size] == '3x3'
+      session['grid'] = Game3x3::GRID
+    elsif params[:size] == '4x4'
+      session['grid'] = Game4x4::GRID
+    end
+
     @grid    = session['grid']
     @mode    = params[:mode]
     @size    = params[:size]
@@ -23,21 +27,27 @@ class TicTacToe < Sinatra::Base
   end
 
   post '/game/move' do
-    @game        = Game.new(session)
+    if session['size'] == '3x3'
+      @game = Game3x3.new(session)
+    elsif session['size'] == '4x4'
+      @game = Game4x4.new(session)
+    end
+
     @player_move = params[:grid_position]
     @grid        = @game.grid
+    @player_1    = @game.player_1
+    @player_2    = @game.player_2
     @mode        = @game.mode
     @size        = @game.size
+
     @game.round(@player_move)
 
     @message     = @game.message
+    @turn        = @game.turn
+    session['turn']    = @turn
     session['grid']    = @game.grid
-    session['turn']    = @game.turn
     session['message'] = @game.message
-    # @player_1       = game.player_1
-    # @player_2       = game.player_2
     # @cpu            = game.cpu
-    # @turn           = game.turn
     # @message        = game.message
     # @result         = nil || game.result
     if @game.result

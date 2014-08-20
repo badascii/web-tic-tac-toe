@@ -3,9 +3,9 @@
     <h1>Tic-Tac-Toe</h1>
     <% if @mode == 'human' %>
       <%= '<h2>Player vs Player. Fight!</h2>' %>
-        <% if @game.turn == @game.player_1 %>
+        <% if @turn == @player_1 %>
           <%= '<h3>Player 1 Turn</h3>' %>
-        <% elsif @game.turn == @game.player_2 %>
+        <% elsif @turn == @player_2 %>
           <%= '<h3>Player 2 Turn</h3>' %>
         <% end %>
     <% elsif @mode == 'cpu' %>
@@ -29,7 +29,7 @@
         <td id='b1'> <%= @grid['b1'] %> </td>
         <td id='c1'> <%= @grid['c1'] %> </td>
         <% if @grid['d1'] %>
-          <td id='d1'> <%= @grid['d1'] %> </td>
+          <%= "<td id='d1'>#{@grid['d1']} </td>" %>
         <% end %>
       </tr>
       <tr>
@@ -37,7 +37,7 @@
         <td id='b2'> <%= @grid['b2'] %> </td>
         <td id='c2'> <%= @grid['c2'] %> </td>
         <% if @grid['d2'] %>
-          <td id='d1'> <%= @grid['d2'] %> </td>
+          <%= "<td id='d2'>#{@grid['d2']} </td>" %>
         <% end %>
       </tr>
       <tr>
@@ -45,7 +45,7 @@
         <td id='b3'> <%= @grid['b3'] %> </td>
         <td id='c3'> <%= @grid['c3'] %> </td>
         <% if @grid['d3'] %>
-          <td id='d3'> <%= @grid['d3'] %> </td>
+          <%= "<td id='d3'>#{@grid['d3']} </td>" %>
         <% end %>
       </tr>
       <% if @grid['a4'] %>

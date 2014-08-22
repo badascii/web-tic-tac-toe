@@ -16,7 +16,7 @@ class TicTacToe < Sinatra::Base
     elsif params[:size] == '4x4'
       session['grid'] = Game4x4::GRID
     end
-
+    # session['grid'] = Game.grid_for_size(params[:size])
     @grid    = session['grid']
     @mode    = params[:mode]
     @size    = params[:size]
@@ -32,7 +32,7 @@ class TicTacToe < Sinatra::Base
     elsif session['size'] == '4x4'
       @game = Game4x4.new(session)
     end
-
+    # @game = Game.new(session)
     @player_move = params[:grid_position]
     @grid        = @game.grid
     @player_1    = @game.player_1
@@ -47,17 +47,16 @@ class TicTacToe < Sinatra::Base
     session['turn']    = @turn
     session['grid']    = @game.grid
     session['message'] = @game.message
-    # @cpu            = game.cpu
-    # @message        = game.message
-    # @result         = nil || game.result
+
     if @game.result
       session['result'] = @game.result
       redirect '/game/result'
+    else
+      erb :game
     end
-
-    erb :game
   end
 
+  # TODO: Add 'New Game' button to this page
   get '/game/result' do
     @result = session['result']
     erb :result

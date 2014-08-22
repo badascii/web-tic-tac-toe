@@ -22,7 +22,6 @@ describe TicTacToe do
       page.has_button?('Start').must_equal(true)
     end
 
-
     it 'should allow the user to choose their opponent' do
       choose('human')
       choose('4x4')

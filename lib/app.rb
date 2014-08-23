@@ -23,7 +23,11 @@ class TicTacToe < Sinatra::Base
     @message = 'Welcome to the Fields of Strife'
     session['mode'] = @mode
     session['size'] = @size
-    erb :game
+    if @mode == '3x3'
+      erb :game_3x4
+    elsif @mode == '4x4'
+      erb :game_4x3
+    end
   end
 
   post '/game/move' do
@@ -51,8 +55,10 @@ class TicTacToe < Sinatra::Base
     if @game.result
       session['result'] = @game.result
       redirect '/game/result'
-    else
-      erb :game
+    elsiff @mode == '3x3'
+      erb :game_3x4
+    elsif @mode == '4x4'
+      erb :game_4x3
     end
   end
 

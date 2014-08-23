@@ -56,9 +56,9 @@ class TicTacToe < Sinatra::Base
       session['result'] = @game.result
       redirect '/game/result'
     elsiff @mode == '3x3'
-      erb :game_3x4
+      erb :game_3x3
     elsif @mode == '4x4'
-      erb :game_4x3
+      erb :game_4x4
     end
   end
 

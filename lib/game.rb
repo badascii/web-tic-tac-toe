@@ -1,35 +1,20 @@
+require_relative 'game_3x3.rb'
+require_relative 'game_4x4.rb'
+
 class Game
-
-  GRID = {'a1' => 0, 'b1' => 0, 'c1' => 0,
-          'a2' => 0, 'b2' => 0, 'c2' => 0,
-          'a3' => 0, 'b3' => 0, 'c3' => 0}
-
-  WIN_CONDITIONS = [
-    ['a1', 'a2', 'a3'], #   vertical win 0
-    ['b1', 'b2', 'b3'], #   vertical win 1
-    ['c1', 'c2', 'c3'], #   vertical win 2
-    ['a1', 'b1', 'c1'], # horizontal win 3
-    ['a2', 'b2', 'c2'], # horizontal win 4
-    ['a3', 'b3', 'c3'], # horizontal win 5
-    ['a1', 'b2', 'c3'], #   diagonal win 6
-    ['a3', 'b2', 'c1']  #   diagonal win 7
-    ]
-
-  POSITION_REGEX         = /[abc][1-3]/
-  POSITION_REGEX_REVERSE = /[1-3][abc]/
 
   attr_accessor :grid, :player_1, :player_2, :cpu, :mode, :size, :turn, :message, :result
 
-  def initialize(session)
-    @player_1    = 'X'
-    @player_2    = 'O'
-    @cpu         = 'O'
-    @grid        = session['grid']
-    @mode        = session['mode']
-    @size        = session['size']
-    @turn        = session['turn'] || @player_1
-    @message     = session['message']
-    @result      = nil
+  def initialize(opts)
+    @size = opts[:size]
+    @mode = opts[:mode]
+    @turn = opts[:turn]
+    @player_1 = 'X'
+    @player_2 = 'O'
+    @cpu = 'O'
+    @result = nil
+    @grid = get_grid(@size)
+    @message = opts[:message] || 'Welcome to the Fields of Strife'
   end
 
   def round(position)
@@ -57,6 +42,14 @@ class Game
   end
 
   private
+
+  def get_grid(size)
+    if size == '4x4'
+      Game4x4::GRID
+    else
+      Game3x3::GRID
+    end
+  end
 
   def switch_turns
     if @turn == @player_1

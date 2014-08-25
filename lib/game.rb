@@ -18,27 +18,14 @@ class Game
   end
 
   def round(position)
-    if @mode == 'human'
-      get_player_input(position)
-      switch_turns
-      if win?(@player_1)
-        @result = "#{@player_1} wins! Congrats!"
-      elsif win?(@cpu)
-        @result = "#{@player_2} wins! Congrats!"
-      elsif grid_full?
-        @result = 'Stalemate'
-      end
-    elsif @mode == 'cpu'
-      get_player_input(position)
-      cpu_turn
-      if win?(@player_1)
-        @result = 'You win. Congrats!'
-      elsif win?(@cpu)
-        @result = 'You lose. Really?'
-      elsif grid_full?
-        @result = 'Stalemate'
-      end
-    end
+    game = game_class.new(session_hash)
+    game.round(position)
+    @grid = game.grid
+    @mode = game.mode
+    @size = game.size
+    @turn = game.turn
+    @message = game.message
+    @result = game.result
   end
 
   private
@@ -49,6 +36,16 @@ class Game
     else
       Game3x3::GRID
     end
+  end
+
+  def session_hash
+    {
+      size: @size,
+      mode: @mode,
+      message: @message,
+      result: @result,
+      grid: @grid
+    }
   end
 
   def switch_turns

@@ -11,54 +11,25 @@ class TicTacToe < Sinatra::Base
   end
 
   post '/game' do
-    if params[:size] == '3x3'
-      session['grid'] = Game3x3::GRID
-    elsif params[:size] == '4x4'
-      session['grid'] = Game4x4::GRID
-    end
-    # session['grid'] = Game.grid_for_size(params[:size])
-    @grid    = session['grid']
-    @mode    = params[:mode]
-    @size    = params[:size]
-    @message = 'Welcome to the Fields of Strife'
-    session['mode'] = @mode
-    session['size'] = @size
-    if @mode == '3x3'
-      erb :game_3x4
-    elsif @mode == '4x4'
-      erb :game_4x3
-    end
+    opts = {
+      size: params[:size],
+      mode: params[:mode]
+    }
+    @game = Game.new(opts)
+    session['game'] = @game.hash_for_session
+    erb :game
   end
 
   post '/game/move' do
-    if session['size'] == '3x3'
-      @game = Game3x3.new(session)
-    elsif session['size'] == '4x4'
-      @game = Game4x4.new(session)
-    end
-    # @game = Game.new(session)
-    @player_move = params[:grid_position]
-    @grid        = @game.grid
-    @player_1    = @game.player_1
-    @player_2    = @game.player_2
-    @mode        = @game.mode
-    @size        = @game.size
-
+    @game = Game.new(session['game'])
     @game.round(@player_move)
-
-    @message     = @game.message
-    @turn        = @game.turn
-    session['turn']    = @turn
-    session['grid']    = @game.grid
-    session['message'] = @game.message
 
     if @game.result
       session['result'] = @game.result
       redirect '/game/result'
-    elsiff @mode == '3x3'
-      erb :game_3x3
-    elsif @mode == '4x4'
-      erb :game_4x4
+    else
+      session['game'] = @game.session_hash
+      erb :game
     end
   end
 

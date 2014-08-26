@@ -1,6 +1,7 @@
 require 'sinatra/base'
-require_relative 'game_3x3.rb'
-require_relative 'game_4x4.rb'
+require_relative 'game'
+require_relative 'game_3x3'
+require_relative 'game_4x4'
 
 class TicTacToe < Sinatra::Base
   enable :sessions
@@ -16,7 +17,7 @@ class TicTacToe < Sinatra::Base
       mode: params[:mode]
     }
     @game = Game.new(opts)
-    session['game'] = @game.hash_for_session
+    session['game'] = @game.session_hash
     erb :game
   end
 

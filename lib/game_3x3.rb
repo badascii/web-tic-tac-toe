@@ -5,14 +5,14 @@ class Game3x3
           'a3' => 0, 'b3' => 0, 'c3' => 0}
 
   WIN_CONDITIONS = [
-    ['a1', 'a2', 'a3'], #   vertical win 0
-    ['b1', 'b2', 'b3'], #   vertical win 1
-    ['c1', 'c2', 'c3'], #   vertical win 2
-    ['a1', 'b1', 'c1'], # horizontal win 3
-    ['a2', 'b2', 'c2'], # horizontal win 4
-    ['a3', 'b3', 'c3'], # horizontal win 5
-    ['a1', 'b2', 'c3'], #   diagonal win 6
-    ['a3', 'b2', 'c1']  #   diagonal win 7
+    ['a1', 'a2', 'a3'], # 0 vertical win
+    ['b1', 'b2', 'b3'], # 1 vertical win
+    ['c1', 'c2', 'c3'], # 2 vertical win
+    ['a1', 'b1', 'c1'], # 3 horizontal win
+    ['a2', 'b2', 'c2'], # 4 horizontal win
+    ['a3', 'b3', 'c3'], # 5 horizontal win
+    ['a1', 'b2', 'c3'], # 6 diagonal win
+    ['a3', 'b2', 'c1']  # 7 diagonal win
     ]
 
   POSITION_REGEX         = /[abc][1-3]/

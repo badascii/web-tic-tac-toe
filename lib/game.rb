@@ -28,16 +28,6 @@ class Game
     @result = game.result
   end
 
-  private
-
-  def get_grid(size)
-    if size == '4x4'
-      Game4x4::GRID
-    else
-      Game3x3::GRID
-    end
-  end
-
   def session_hash
     {
       size: @size,
@@ -46,6 +36,16 @@ class Game
       result: @result,
       grid: @grid
     }
+  end
+
+  private
+
+  def get_grid(size)
+    if size == '4x4'
+      Game4x4::GRID
+    else
+      Game3x3::GRID
+    end
   end
 
   def switch_turns

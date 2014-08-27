@@ -9,11 +9,11 @@ class Game
     @size     = opts[:size]
     @mode     = opts[:mode]
     @turn     = opts[:turn]
+    @grid     = opts[:grid] || get_grid(@size)
     @player_1 = 'X'
     @player_2 = 'O'
     @cpu      = 'O'
     @result   = nil
-    @grid     = get_grid(@size)
     @message  = opts[:message] || 'Welcome to the Fields of Strife'
   end
 
@@ -54,29 +54,6 @@ class Game
     else
       Game3x3::GRID
     end
-  end
-
-  def switch_turns
-    if @turn == @player_1
-      @turn = @player_2
-    elsif @turn == @player_2
-      @turn = @player_1
-    end
-  end
-
-  def get_player_input(position)
-    if (valid_position_format?(position)) && (@grid[position] == 0)
-      @grid[position] = @turn
-      @message = 'Movement accepted.'
-    elsif valid_position_format?(position)
-      @message = 'Invalid input. That position is taken.'
-    else
-      @message = 'Invalid input. That is not a valid position.'
-    end
-  end
-
-  def valid_position_format?(position)
-    (position =~ POSITION_REGEX) || (position =~ POSITION_REGEX_REVERSE)
   end
 
   def grid_full?

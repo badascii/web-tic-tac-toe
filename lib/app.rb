@@ -23,6 +23,7 @@ class TicTacToe < Sinatra::Base
 
   post '/game/move' do
     @game = Game.new(session['game'])
+    @player_move = params[:grid_position]
     @game.round(@player_move)
 
     if @game.result

@@ -18,8 +18,8 @@
       <%= '<h2>4x4</h2>' %>
     <% end %>
 
-    <% if @game.game.player_move && !@game.player_move.empty? %>
-      <%= "Your movement was #{@game.player_move}." %>
+    <% if @player_move && !@player_move.empty? %>
+      <%= "Your movement was #{@player_move}." %>
     <% end %>
 
     <table id='grid'>

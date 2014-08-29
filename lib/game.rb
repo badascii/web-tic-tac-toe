@@ -32,6 +32,7 @@ class Game
     {
       size: @size,
       mode: @mode,
+      turn: @turn,
       message: @message,
       result: @result,
       grid: @grid

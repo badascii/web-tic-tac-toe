@@ -3,10 +3,10 @@
     <h1>Tic-Tac-Toe</h1>
     <% if @game.mode == 'human' %>
       <%= '<h2>Player vs Player. Fight!</h2>' %>
-        <% if @game.turn == @game.player_1 %>
-          <%= '<h3>Player 1 Turn</h3>' %>
-        <% elsif @game.turn == @game.player_2 %>
+        <% if @game.turn == @game.player_2 %>
           <%= '<h3>Player 2 Turn</h3>' %>
+        <% else %>
+          <%= '<h3>Player 1 Turn</h3>' %>
         <% end %>
     <% elsif @game.mode == 'cpu' %>
       <%= '<h2>Player vs CPU. Good luck!</h2>' %>

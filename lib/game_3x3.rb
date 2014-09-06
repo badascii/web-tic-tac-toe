@@ -1,4 +1,5 @@
 class Game3x3
+  require_relative 'minimax'
 
   GRID = {'a1' => 0, 'b1' => 0, 'c1' => 0,
           'a2' => 0, 'b2' => 0, 'c2' => 0,
@@ -24,6 +25,7 @@ class Game3x3
     @player_1    = 'X'
     @player_2    = 'O'
     @cpu         = 'O'
+    @cpu_move    = nil
     @grid        = opts[:grid]
     @mode        = opts[:mode]
     @size        = opts[:size]
@@ -45,7 +47,15 @@ class Game3x3
       end
     elsif @mode == 'cpu'
       get_player_input(position)
-      cpu_turn
+      game = Minimax.new
+      depth = 0
+      @grid.each do |location|
+        if location != 0
+          depth += 1
+        end
+      end
+      game.minimax(self, depth)
+      @grid[game.cpu_move] = @cpu
       if win?(@player_1)
         @result = 'You win. Congrats!'
       elsif win?(@cpu)
@@ -79,6 +89,10 @@ class Game3x3
 
   def valid_position_format?(position)
     (position =~ POSITION_REGEX) || (position =~ POSITION_REGEX_REVERSE)
+  end
+
+  def game_over?
+    win?(@player_1) || win?(@player_2) || grid_full?
   end
 
   def grid_full?

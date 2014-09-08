@@ -16,7 +16,7 @@ class Minimax
     moves  = []  # an array of moves
 
     # Populate the scores array, recursing as needed
-    game.available_moves.each do |move|
+    available_moves(game.grid).each do |move|
       game.grid[move] = game.cpu
       possible_game = game
       scores.push(minimax(possible_game, depth))
@@ -24,7 +24,7 @@ class Minimax
     end
 
     # Do the min or the max calculation
-    if game.turn == game.player
+    if game.turn == game.player_1
       # This is the max calculation
       max_score_index = scores.each_with_index.max[1]
       game.cpu_move = moves[max_score_index]
@@ -37,9 +37,9 @@ class Minimax
     end
   end
 
-  def available_moves
+  def available_moves(grid)
     moves = []
-    self.grid.each do |location|
+    grid.each do |location|
       if location == 0
         moves << location
       end

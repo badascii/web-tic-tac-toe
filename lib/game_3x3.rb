@@ -66,6 +66,10 @@ class Game3x3
     end
   end
 
+  def game_over?
+    win?(@player_1) || win?(@player_2) || grid_full?
+  end
+
   private
 
   def switch_turns
@@ -89,10 +93,6 @@ class Game3x3
 
   def valid_position_format?(position)
     (position =~ POSITION_REGEX) || (position =~ POSITION_REGEX_REVERSE)
-  end
-
-  def game_over?
-    win?(@player_1) || win?(@player_2) || grid_full?
   end
 
   def grid_full?

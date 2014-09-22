@@ -197,6 +197,8 @@ class Game4x4
      @grid['a3'] = @cpu
     elsif @grid['c3'] == 0
       @grid['c3'] = @cpu
+    else
+      optimal_move
     end
   end
 
@@ -215,6 +217,8 @@ class Game4x4
       @grid['b3'] = @cpu
     elsif @grid['c2'] == 0
       @grid['c2'] = @cpu
+    else
+      optimal_move
     end
   end
 

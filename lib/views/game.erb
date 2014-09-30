@@ -2,24 +2,20 @@
   <body>
     <h1>Tic-Tac-Toe</h1>
     <% if @game.mode == 'human' %>
-      <%= '<h2>Player vs Player. Fight!</h2>' %>
+      <%= '<h3>Player vs Player. Fight!</h3>' %>
         <% if @game.turn == @game.player_2 %>
-          <%= '<h3>Player 2 Turn</h3>' %>
+          <%= '<h4>Player 2 Turn</h4>' %>
         <% else %>
-          <%= '<h3>Player 1 Turn</h3>' %>
+          <%= '<h4>Player 1 Turn</h4>' %>
         <% end %>
     <% elsif @game.mode == 'cpu' %>
-      <%= '<h2>Player vs CPU. Good luck!</h2>' %>
+      <%= '<h3>Player vs CPU. Good luck!</h3>' %>
     <% end %>
 
     <% if @game.size == '3x3' %>
-      <%= '<h2>3x3</h2>' %>
+      <%= '<h3>3x3</h3>' %>
     <% elsif @game.size == '4x4' %>
-      <%= '<h2>4x4</h2>' %>
-    <% end %>
-
-    <% if @player_move && !@player_move.empty? %>
-      <%= "Your movement was #{@player_move}." %>
+      <%= '<h3>4x4</h3>' %>
     <% end %>
 
     <table id='grid'>
@@ -54,13 +50,18 @@
         <td id='d4'> <%= @game.grid['d4'] %> </td>
       <% end %>
     </table>
+    </br>
     <% if @game.grid.has_value?(0) %>
       <form method='post' action='/game/move'>
-        <label for='grid_position'>Grid position</label>
+        <label for='grid_position'>Grid position:</label>
         <input type='text' name='grid_position' id='grid_position' />
         <input type='submit' value='Submit' />
       </form>
     <% end %>
+
     <%= @game.message %>
+    <% if @player_move && !@player_move.empty? %>
+      <%= "Your movement was #{@player_move.upcase}." %>
+    <% end %>
   </body>
 </html>

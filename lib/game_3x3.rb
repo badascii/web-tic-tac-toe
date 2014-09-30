@@ -15,8 +15,8 @@ class Game3x3
     ['a3', 'b2', 'c1']  # 7 diagonal win
     ]
 
-  POSITION_REGEX         = /[abc][1-3]/
-  POSITION_REGEX_REVERSE = /[1-3][abc]/
+  POSITION_REGEX         = /[abc][1-3]/i
+  POSITION_REGEX_REVERSE = /[1-3][abc]/i
 
   attr_accessor :grid, :player_1, :player_2, :cpu, :mode, :size, :turn, :message, :result
 
@@ -45,9 +45,6 @@ class Game3x3
       end
     elsif @mode == 'cpu'
       get_player_input(position)
-      if valid_position_format?(position)
-        cpu_turn
-      end
       if win?(@player_1)
         @result = 'You win. Congrats!'
       elsif win?(@cpu)
@@ -72,6 +69,9 @@ class Game3x3
     if (valid_position_format?(position)) && (@grid[position] == ' ')
       @grid[position] = @turn
       @message = 'Movement accepted.'
+      if @mode == 'cpu'
+        cpu_turn
+      end
     elsif valid_position_format?(position)
       @message = 'Invalid input. That position is taken.'
     else

@@ -176,6 +176,23 @@ describe TicTacToe do
         page.has_content?('O').must_equal(true)
       end
     end
+
+    it 'should prevent the CPU from placing an unanswered move due to incorrect input' do
+      fill_in 'grid_position', with: 'AA'
+      click_button 'Submit'
+      within('#b2') do
+        page.has_content?('O').must_equal(false)
+      end
+    end
+
+    it 'should prevent the CPU from placing an unanswered move due to occupied input' do
+      fill_in 'grid_position', with: 'A1'
+      click_button 'Submit'
+      fill_in 'grid_position', with: 'A1'
+      within('#b1') do
+        page.has_content?('O').must_equal(false)
+      end
+    end
   end
 
   describe 'human match' do

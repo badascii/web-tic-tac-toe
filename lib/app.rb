@@ -38,6 +38,7 @@ class TicTacToe < Sinatra::Base
   # TODO: Add 'New Game' button to this page
   get '/game/result' do
     @result = session['result']
+    @game = Game.new(session['game'])
     erb :result
   end
 end

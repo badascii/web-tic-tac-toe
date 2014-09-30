@@ -45,7 +45,9 @@ class Game3x3
       end
     elsif @mode == 'cpu'
       get_player_input(position)
-      cpu_turn
+      if valid_position_format?(position)
+        cpu_turn
+      end
       if win?(@player_1)
         @result = 'You win. Congrats!'
       elsif win?(@cpu)

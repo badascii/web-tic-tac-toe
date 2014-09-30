@@ -2,14 +2,14 @@
   <body>
     <h1>Tic-Tac-Toe</h1>
     <% if @game.mode == 'human' %>
-      <%= '<h3>Player vs Player. Fight!</h3>' %>
+      <%= '<h3>Human vs Human. Fight!</h3>' %>
         <% if @game.turn == @game.player_2 %>
           <%= '<h4>Player 2 Turn</h4>' %>
         <% else %>
           <%= '<h4>Player 1 Turn</h4>' %>
         <% end %>
     <% elsif @game.mode == 'cpu' %>
-      <%= '<h3>Player vs CPU. Good luck!</h3>' %>
+      <%= '<h3>Human vs CPU. Good luck!</h3>' %>
     <% end %>
 
     <% if @game.size == '3x3' %>

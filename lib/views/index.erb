@@ -4,9 +4,9 @@
     <h3>Please select a game format:</h3>
     <form method='post' action='/game'>
       <label for='game_settings'>Game Settings:</label>
+      <input type='radio' id='cpu' value='cpu' name='mode' checked>CPU</input>
       <input type='radio' id='human' value='human' name='mode'>Human</input>
-      <input type='radio' id='cpu' value='cpu' name='mode'>CPU</input>
-      <input type='radio' id='3x3' value='3x3' name='size'>3x3</input>
+      <input type='radio' id='3x3' value='3x3' name='size' checked>3x3</input>
       <input type='radio' id='4x4' value='4x4' name='size'>4x4</input>
       <input type='submit' value='Start' />
     </form>

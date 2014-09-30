@@ -26,7 +26,7 @@ describe TicTacToe do
       choose('human')
       choose('3x3')
       click_button 'Start'
-      page.has_content?('Player vs Player').must_equal(true)
+      page.has_content?('Human vs Human').must_equal(true)
       page.has_content?('3x3').must_equal(true)
     end
   end
@@ -55,6 +55,13 @@ describe TicTacToe do
       click_button 'Submit'
       within('#c2') do
         page.has_content?('X').must_equal(true)
+      end
+    end
+
+    it 'should allow case-insensitive input' do
+      fill_in 'grid_position', with: 'A1'
+      within('#b2') do
+        page.has_content?('O').must_equal(true)
       end
     end
 
@@ -100,7 +107,7 @@ describe TicTacToe do
     end
 
     it 'should notify the player that it is a CPU match' do
-      page.has_content?('Player vs CPU').must_equal(true)
+      page.has_content?('Human vs CPU').must_equal(true)
     end
 
     it 'should place the initial CPU move in B2 if open' do
@@ -205,7 +212,7 @@ describe TicTacToe do
     end
 
     it 'should notify the player that it is a human match' do
-      page.has_content?('Player vs Player').must_equal(true)
+      page.has_content?('Human vs Human').must_equal(true)
     end
 
     it 'should record 2nd player input on the grid' do

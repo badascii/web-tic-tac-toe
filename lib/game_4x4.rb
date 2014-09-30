@@ -18,8 +18,8 @@ class Game4x4
     ['a4', 'b3', 'c2', 'd1']  # 9 diagonal win
     ]
 
-  POSITION_REGEX         = /[abcd][1-4]/
-  POSITION_REGEX_REVERSE = /[1-4][abcd]/
+  POSITION_REGEX         = /[abcd][1-4]/i
+  POSITION_REGEX_REVERSE = /[1-4][abcd]/i
 
   attr_accessor :grid, :player_1, :player_2, :cpu, :mode, :size, :turn, :message, :result
 
@@ -48,7 +48,6 @@ class Game4x4
       end
     elsif @mode == 'cpu'
       get_player_input(position)
-      cpu_turn
       if win?(@player_1)
         @result = 'You win. Congrats!'
       elsif win?(@cpu)
@@ -73,6 +72,9 @@ class Game4x4
     if (valid_position_format?(position)) && (@grid[position] == 0)
       @grid[position] = @turn
       @message = 'Movement accepted.'
+      if @mode == 'cpu'
+        cpu_turn
+      end
     elsif valid_position_format?(position)
       @message = 'Invalid input. That position is taken.'
     else

@@ -66,8 +66,8 @@ class Game3x3
   end
 
   def get_player_input(position)
-    if (valid_position_format?(position)) && (@grid[position] == ' ')
-      @grid[position] = @turn
+    if (valid_position_format?(position)) && (@grid[position.downcase] == ' ')
+      @grid[position.downcase] = @turn
       @message = 'Movement accepted.'
       if @mode == 'cpu'
         cpu_turn

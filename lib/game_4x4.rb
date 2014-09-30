@@ -69,8 +69,8 @@ class Game4x4
   end
 
   def get_player_input(position)
-    if (valid_position_format?(position)) && (@grid[position] == 0)
-      @grid[position] = @turn
+    if (valid_position_format?(position)) && (@grid[position.downcase] == 0)
+      @grid[position.downcase] = @turn
       @message = 'Movement accepted.'
       if @mode == 'cpu'
         cpu_turn

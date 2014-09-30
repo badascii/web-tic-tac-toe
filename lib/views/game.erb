@@ -64,7 +64,7 @@
       <% end %>
     </table>
     </br>
-    <% if @game.grid.has_value?(' ') %>
+    <% if @game.grid.has_value?(' ') || @game.grid.has_value?(0)%>
       <form method='post' action='/game/move'>
         <label for='grid_position'>Grid position:</label>
         <input type='text' name='grid_position' id='grid_position' autofocus />

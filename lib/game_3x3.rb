@@ -155,7 +155,7 @@ class Game3x3
 
   def optimal_move
     if position_empty?('b1') && position_empty?('b3')
-      @grid['b1'] = @cpu
+      @grid['b3'] = @cpu
     elsif position_empty?('a2') && position_empty?('c2')
       @grid['c2'] = @cpu
     else

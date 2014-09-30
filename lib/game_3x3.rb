@@ -1,8 +1,8 @@
 class Game3x3
 
-  GRID = {'a1' => 0, 'b1' => 0, 'c1' => 0,
-          'a2' => 0, 'b2' => 0, 'c2' => 0,
-          'a3' => 0, 'b3' => 0, 'c3' => 0}
+  GRID = {'a1' => ' ', 'b1' => ' ', 'c1' => ' ',
+          'a2' => ' ', 'b2' => ' ', 'c2' => ' ',
+          'a3' => ' ', 'b3' => ' ', 'c3' => ' '}
 
   WIN_CONDITIONS = [
     ['a1', 'a2', 'a3'], # 0 vertical win
@@ -67,7 +67,7 @@ class Game3x3
   end
 
   def get_player_input(position)
-    if (valid_position_format?(position)) && (@grid[position] == 0)
+    if (valid_position_format?(position)) && (@grid[position] == ' ')
       @grid[position] = @turn
       @message = 'Movement accepted.'
     elsif valid_position_format?(position)
@@ -82,7 +82,7 @@ class Game3x3
   end
 
   def grid_full?
-    !@grid.has_value?(0)
+    !@grid.has_value?(' ')
   end
 
   def win?(mark)
@@ -158,7 +158,7 @@ class Game3x3
       @grid['c2'] = @cpu
     else
       @grid.each do |key, value|
-        if value == 0
+        if value == ' '
           @grid[key] = @cpu
           break
         end
@@ -167,22 +167,22 @@ class Game3x3
   end
 
   def position_empty?(position)
-    @grid[position] == 0
+    @grid[position] == ' '
   end
 
   def corner_defense?
     side_positions = [@grid['a2'], @grid['b1'], @grid['b3'], @grid['c2']]
-    side_positions.count(0) == 1
+    side_positions.count(' ') == 1
   end
 
   def place_corner_defense
-    if @grid['a1'] == 0
+    if @grid['a1'] == ' '
       @grid['a1'] = @cpu
-    elsif @grid['c1'] == 0
+    elsif @grid['c1'] == ' '
       @grid['c1'] = @cpu
-    elsif @grid['a3'] == 0
+    elsif @grid['a3'] == ' '
      @grid['a3'] = @cpu
-    elsif @grid['c3'] == 0
+    elsif @grid['c3'] == ' '
       @grid['c3'] = @cpu
     end
   end
@@ -194,13 +194,13 @@ class Game3x3
   end
 
   def place_side_defense
-    if @grid['a2'] == 0
+    if @grid['a2'] == ' '
       @grid['a2'] = @cpu
-    elsif @grid['b1'] == 0
+    elsif @grid['b1'] == ' '
       @grid['b1'] = @cpu
-    elsif @grid['b3'] == 0
+    elsif @grid['b3'] == ' '
       @grid['b3'] = @cpu
-    elsif @grid['c2'] == 0
+    elsif @grid['c2'] == ' '
       @grid['c2'] = @cpu
     end
   end

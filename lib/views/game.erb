@@ -20,6 +20,16 @@
 
     <table id='grid'>
       <tr>
+        <td> </td>
+        <td>A</td>
+        <td>B</td>
+        <td>C</td>
+        <% if @game.grid['d1'] %>
+          <td>D</td>
+        <% end %>
+      </tr>
+      <tr>
+        <td>1</td>
         <td id='a1'> <%= @game.grid['a1'] %> </td>
         <td id='b1'> <%= @game.grid['b1'] %> </td>
         <td id='c1'> <%= @game.grid['c1'] %> </td>
@@ -28,6 +38,7 @@
         <% end %>
       </tr>
       <tr>
+        <td>2</td>
         <td id='a2'> <%= @game.grid['a2'] %> </td>
         <td id='b2'> <%= @game.grid['b2'] %> </td>
         <td id='c2'> <%= @game.grid['c2'] %> </td>
@@ -36,6 +47,7 @@
         <% end %>
       </tr>
       <tr>
+        <td>3</td>
         <td id='a3'> <%= @game.grid['a3'] %> </td>
         <td id='b3'> <%= @game.grid['b3'] %> </td>
         <td id='c3'> <%= @game.grid['c3'] %> </td>
@@ -44,6 +56,7 @@
         <% end %>
       </tr>
       <% if @game.grid['a4'] %>
+        <td>4</td>
         <td id='a4'> <%= @game.grid['a4'] %> </td>
         <td id='b4'> <%= @game.grid['b4'] %> </td>
         <td id='c4'> <%= @game.grid['c4'] %> </td>

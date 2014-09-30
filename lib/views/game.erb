@@ -67,7 +67,7 @@
     <% if @game.grid.has_value?(' ') %>
       <form method='post' action='/game/move'>
         <label for='grid_position'>Grid position:</label>
-        <input type='text' name='grid_position' id='grid_position' />
+        <input type='text' name='grid_position' id='grid_position' autofocus />
         <input type='submit' value='Submit' />
       </form>
     <% end %>

@@ -34,28 +34,36 @@ class Game3x3
 
   def round(position)
     if @mode == 'human'
-      get_player_input(position)
-      switch_turns
-      if win?(@player_1)
-        @result = "#{@player_1} wins! Congrats!"
-      elsif win?(@cpu)
-        @result = "#{@player_2} wins! Congrats!"
-      elsif grid_full?
-        @result = 'Stalemate'
-      end
+      human_game(position)
     elsif @mode == 'cpu'
-      get_player_input(position)
-      if win?(@player_1)
-        @result = 'You win. Congrats!'
-      elsif win?(@cpu)
-        @result = 'You lose. Really?'
-      elsif grid_full?
-        @result = 'Stalemate'
-      end
+      cpu_game(position)
     end
   end
 
   private
+
+  def human_game(position)
+    get_player_input(position)
+    switch_turns
+    if win?(@player_1)
+      @result = "#{@player_1} wins! Congrats!"
+    elsif win?(@cpu)
+      @result = "#{@player_2} wins! Congrats!"
+    elsif grid_full?
+      @result = 'Stalemate'
+    end
+  end
+
+  def cpu_game(position)
+    get_player_input(position)
+    if win?(@player_1)
+      @result = 'You win. Congrats!'
+    elsif win?(@cpu)
+      @result = 'You lose. Really?'
+    elsif grid_full?
+      @result = 'Stalemate'
+    end
+  end
 
   def switch_turns
     if @turn == @player_1

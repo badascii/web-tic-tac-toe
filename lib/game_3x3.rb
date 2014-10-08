@@ -167,11 +167,11 @@ class Game3x3
     elsif position_empty?('a2') && position_empty?('c2')
       @grid['c2'] = @cpu
     else
-      find_open_position
+      find_empty_position
     end
   end
 
-  def find_open_position
+  def find_empty_position
     @grid.each do |key, value|
       if value == ' '
         @grid[key] = @cpu

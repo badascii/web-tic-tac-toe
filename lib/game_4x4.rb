@@ -132,7 +132,7 @@ class Game4x4
     win  = cpu_check_for_win(@cpu)
     loss = cpu_check_for_win(@player_1)
 
-    if @grid.values.uniq.length == 2
+    if start_of_game?
       opening_move
     elsif win
       @grid[win]  = @cpu
@@ -164,6 +164,10 @@ class Game4x4
       end
     end
     return move
+  end
+
+ def start_of_game?
+    @grid.values.uniq.length == 2
   end
 
   def opening_move

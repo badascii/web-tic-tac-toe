@@ -60,6 +60,7 @@ describe TicTacToe do
 
     it 'should allow case-insensitive input' do
       fill_in 'grid_position', with: 'A1'
+      click_button 'Submit'
       within('#b2') do
         page.has_content?('O').must_equal(true)
       end

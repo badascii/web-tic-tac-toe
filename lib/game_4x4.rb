@@ -35,19 +35,20 @@ class Game4x4
     @result      = nil
   end
 
-  def round(position)
+ def round(position)
     if @mode == 'human'
-      human_game(position)
+      get_player_input(position)
+      switch_turns
+      human_results
     elsif @mode == 'cpu'
-      cpu_game(position)
+      get_player_input(position)
+      human_results
     end
   end
 
   private
 
-  def human_game(position)
-    get_player_input(position)
-    switch_turns
+  def human_results
     if win?(@player_1)
       @result = "#{@player_1} wins! Congrats!"
     elsif win?(@cpu)
@@ -57,8 +58,7 @@ class Game4x4
     end
   end
 
-  def cpu_game(position)
-    get_player_input(position)
+  def cpu_results
     if win?(@player_1)
       @result = 'You win. Congrats!'
     elsif win?(@cpu)
@@ -67,6 +67,7 @@ class Game4x4
       @result = 'Stalemate'
     end
   end
+
 
   def switch_turns
     if @turn == @player_1

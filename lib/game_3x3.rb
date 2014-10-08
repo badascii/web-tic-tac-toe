@@ -36,22 +36,14 @@ class Game3x3
     if @mode == 'human'
       get_player_input(position)
       switch_turns
-      results
+      human_results
     elsif @mode == 'cpu'
       get_player_input(position)
-      results
+      cpu_results
     end
   end
 
   private
-
-  def results
-    if @mode == 'human'
-      human_results
-    elsif @mode == 'cpu'
-      cpu_results
-    end
-  end
 
   def human_results
     if win?(@player_1)
